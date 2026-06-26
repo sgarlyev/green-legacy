@@ -743,6 +743,39 @@ body {
   margin-top: auto;
 }
 
+/* ── "Чего не делать" — красный стиль ── */
+.do-not-list li::before {
+  content: "✗ ";
+  color: #EF4444;
+}
+
+.modal-section--donot {
+  background: #FFF5F5;
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 0;
+}
+
+.modal-section--donot h3 {
+  color: #DC2626;
+}
+
+.modal-section--donot ul li::before {
+  content: "✗";
+  color: #EF4444;
+  font-weight: 700;
+}
+
+.modal-section--help {
+  background: var(--green-xbg);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.modal-section--help h3 {
+  color: var(--green-mid);
+}
+
 /* ── Responsive ── */
 @media (max-width: 600px) {
   .header-inner { padding: 0 16px; gap: 16px; }

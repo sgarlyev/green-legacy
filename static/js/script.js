@@ -1,51 +1,11 @@
-// ── i18n ──────────────────────────────────────────────────────────────────────
+// ── Переводы ──────────────────────────────────────────────────────────────────
 const TRANSLATIONS = {
-  en: {
-    nav_identify: 'Identify',
-    nav_collection: 'Collection',
-    nav_about: 'About',
-    hero_title: 'Discover the Birds of Turkmenistan',
-    hero_subtitle: 'Upload a photo and our AI will identify the bird and share its story.',
-    upload_label: 'Drag & drop a bird photo here',
-    upload_sub: 'or click to browse',
-    upload_btn: 'Choose Photo',
-    change_photo: 'Change Photo',
-    identify_btn: 'Identify Bird',
-    analyzing: 'Analyzing your photo...',
-    tab_facts: 'Facts',
-    tab_habitat: 'Habitat',
-    tab_diet: 'Diet',
-    tab_threats: 'Threats',
-    tab_help: 'How to Help',
-    new_photo: 'Identify Another Bird',
-    retry: 'Try Again',
-    collection_title: 'Bird Collection',
-    collection_sub: '11 species found in Turkmenistan',
-    about_title: 'About Green Legacy',
-    about_p1: 'Green Legacy is an educational bird identification project focused on the birds of Turkmenistan. Our AI model is trained on photos of 11 common species found across the country.',
-    about_p2: 'The project aims to connect people with local wildlife and inspire conservation action. By learning to recognize the birds around us, we build a deeper appreciation for the natural world.',
-    stat_species: 'Species',
-    stat_languages: 'Languages',
-    stat_powered: 'Powered',
-    tech_title: 'Technology',
-    tech_1: 'TensorFlow Lite — on-device AI inference',
-    tech_2: 'MobileNetV2 — efficient image classification',
-    tech_3: 'Flask — Python web backend',
-    tech_4: 'Trained on photos of Turkmenistan birds',
-    footer: 'Green Legacy · Birds of Turkmenistan · Educational Project',
-    confidence_label: 'confidence',
-    modal_facts: 'Interesting Facts',
-    modal_habitat: 'Habitat',
-    modal_diet: 'Diet',
-    modal_threats: 'Threats',
-    modal_help: 'How to Help',
-  },
   ru: {
     nav_identify: 'Определить',
     nav_collection: 'Коллекция',
     nav_about: 'О проекте',
-    hero_title: 'Откройте для себя птиц Туркменистана',
-    hero_subtitle: 'Загрузите фото, и наш ИИ определит птицу и расскажет о ней.',
+    hero_title: 'Определитель птиц Туркменистана',
+    hero_subtitle: 'Сфотографируйте птицу, загрузите фото — и наш ИИ расскажет всё о ней.',
     upload_label: 'Перетащите фото птицы сюда',
     upload_sub: 'или нажмите, чтобы выбрать',
     upload_btn: 'Выбрать фото',
@@ -57,20 +17,21 @@ const TRANSLATIONS = {
     tab_diet: 'Питание',
     tab_threats: 'Угрозы',
     tab_help: 'Как помочь',
+    tab_do_not: 'Чего не делать',
     new_photo: 'Определить другую птицу',
     retry: 'Попробовать снова',
     collection_title: 'Коллекция птиц',
     collection_sub: '11 видов, встречающихся в Туркменистане',
     about_title: 'О проекте Green Legacy',
-    about_p1: 'Green Legacy — образовательный проект по определению птиц Туркменистана. Наша ИИ-модель обучена на фотографиях 11 распространённых видов.',
-    about_p2: 'Проект стремится связать людей с местной дикой природой и вдохновить на природоохранные действия.',
+    about_p1: 'Green Legacy — образовательный проект по определению птиц Туркменистана. Наш ИИ обучен на фотографиях 11 распространённых видов.',
+    about_p2: 'Проект помогает людям познакомиться с местными птицами и вдохновляет заботиться о природе.',
     stat_species: 'Видов',
     stat_languages: 'Языка',
-    stat_powered: 'На ИИ',
+    stat_powered: 'ИИ',
     tech_title: 'Технологии',
-    tech_1: 'TensorFlow Lite — вывод ИИ на устройстве',
+    tech_1: 'TensorFlow Lite — ИИ-распознавание',
     tech_2: 'MobileNetV2 — классификация изображений',
-    tech_3: 'Flask — бэкенд на Python',
+    tech_3: 'Flask — серверная часть на Python',
     tech_4: 'Обучено на фото птиц Туркменистана',
     footer: 'Green Legacy · Птицы Туркменистана · Образовательный проект',
     confidence_label: 'уверенность',
@@ -79,13 +40,56 @@ const TRANSLATIONS = {
     modal_diet: 'Питание',
     modal_threats: 'Угрозы',
     modal_help: 'Как помочь',
+    modal_do_not: 'Чего не делать',
+  },
+  en: {
+    nav_identify: 'Identify',
+    nav_collection: 'Collection',
+    nav_about: 'About',
+    hero_title: 'Bird Identifier — Turkmenistan',
+    hero_subtitle: 'Upload a bird photo and our AI will identify it and share its story.',
+    upload_label: 'Drag & drop a bird photo here',
+    upload_sub: 'or click to browse',
+    upload_btn: 'Choose Photo',
+    change_photo: 'Change Photo',
+    identify_btn: 'Identify Bird',
+    analyzing: 'Analyzing your photo...',
+    tab_facts: 'Facts',
+    tab_habitat: 'Habitat',
+    tab_diet: 'Diet',
+    tab_threats: 'Threats',
+    tab_help: 'How to Help',
+    tab_do_not: 'What NOT to Do',
+    new_photo: 'Identify Another Bird',
+    retry: 'Try Again',
+    collection_title: 'Bird Collection',
+    collection_sub: '11 species found in Turkmenistan',
+    about_title: 'About Green Legacy',
+    about_p1: 'Green Legacy is an educational bird identification project focused on the birds of Turkmenistan.',
+    about_p2: 'The project connects people with local wildlife and inspires conservation action.',
+    stat_species: 'Species',
+    stat_languages: 'Languages',
+    stat_powered: 'AI',
+    tech_title: 'Technology',
+    tech_1: 'TensorFlow Lite — AI inference',
+    tech_2: 'MobileNetV2 — image classification',
+    tech_3: 'Flask — Python web backend',
+    tech_4: 'Trained on Turkmenistan bird photos',
+    footer: 'Green Legacy · Birds of Turkmenistan · Educational Project',
+    confidence_label: 'confidence',
+    modal_facts: 'Interesting Facts',
+    modal_habitat: 'Habitat',
+    modal_diet: 'Diet',
+    modal_threats: 'Threats',
+    modal_help: 'How to Help',
+    modal_do_not: 'What NOT to Do',
   },
   tk: {
     nav_identify: 'Kesgitlemek',
     nav_collection: 'Kolleksiýa',
     nav_about: 'Barada',
-    hero_title: 'Türkmenistanyň Guşlaryny Açyň',
-    hero_subtitle: 'Surat ýükläň, emeli aňymyz guşy kesgitlesin we onuň barada gürrüň bersin.',
+    hero_title: 'Türkmenistanyň Guş Kesgitleyijisi',
+    hero_subtitle: 'Surat ýükläň — emeli aňymyz guşy kesgitlesin.',
     upload_label: 'Guş suratyny şu ýere süýräň',
     upload_sub: 'ýa-da saýlamak üçin basyň',
     upload_btn: 'Surat Saýlaň',
@@ -97,53 +101,53 @@ const TRANSLATIONS = {
     tab_diet: 'Iýmitleniş',
     tab_threats: 'Howplar',
     tab_help: 'Nädip Kömek Etmeli',
+    tab_do_not: 'Näme Etmeli Däl',
     new_photo: 'Başga Guşy Kesgitle',
     retry: 'Täzeden Synanyşmak',
     collection_title: 'Guş Kolleksiýasy',
-    collection_sub: 'Türkmenistanda duşulýan 11 görnüş',
+    collection_sub: '11 görnüş',
     about_title: 'Green Legacy Barada',
-    about_p1: 'Green Legacy Türkmenistanyň guşlaryny kesgitlemek boýunça bilim taslamasy. Emeli aň modelimiz ýurtda duşulýan 11 ýaýran görnüşiň suratlary esasynda öwredildi.',
-    about_p2: 'Taslama adamlary ýerli ýabany tebigat bilen baglanyşdyrmaga we tebigaty goramak hereketlerini ruhlandyrmaga gönükdirilendir.',
+    about_p1: 'Türkmenistanyň guşlaryny kesgitlemek boýunça bilim taslamasy.',
+    about_p2: 'Taslama adamlary ýerli tebigat bilen baglanyşdyrýar.',
     stat_species: 'Görnüş',
     stat_languages: 'Dil',
     stat_powered: 'AI',
     tech_title: 'Tehnologiýa',
-    tech_1: 'TensorFlow Lite — enjamda AI çaklamasy',
-    tech_2: 'MobileNetV2 — surat klassifikasiýasy',
-    tech_3: 'Flask — Python web backend',
-    tech_4: 'Türkmenistanyň guş suratlary esasynda öwredildi',
-    footer: 'Green Legacy · Türkmenistanyň Guşlary · Bilim Taslamasy',
+    tech_1: 'TensorFlow Lite',
+    tech_2: 'MobileNetV2',
+    tech_3: 'Flask',
+    tech_4: 'Türkmenistanyň guşlary',
+    footer: 'Green Legacy · Türkmenistanyň Guşlary',
     confidence_label: 'ygtybarlylyk',
     modal_facts: 'Gyzykly Faktlar',
     modal_habitat: 'Ýaşaýyş Ýeri',
     modal_diet: 'Iýmitleniş',
     modal_threats: 'Howplar',
     modal_help: 'Nädip Kömek Etmeli',
+    modal_do_not: 'Näme Etmeli Däl',
   }
 };
 
-let currentLang = 'en';
+// ── Состояние ──────────────────────────────────────────────────────────────────
+let currentLang = 'ru'; // русский по умолчанию
 let birdsData = [];
 let selectedFile = null;
 let currentBird = null;
 let currentTab = 'facts';
+let lastConfidence = 0;
 
-// ── Language ─────────────────────────────────────────────────────────────────
+// ── Переводы ──────────────────────────────────────────────────────────────────
 function t(key) {
-  return TRANSLATIONS[currentLang][key] || TRANSLATIONS.en[key] || key;
+  return TRANSLATIONS[currentLang]?.[key] || TRANSLATIONS.ru[key] || key;
 }
 
 function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    el.textContent = t(key);
+    el.textContent = t(el.getAttribute('data-i18n'));
   });
-  // Re-render result if visible
   if (currentBird && document.getElementById('result-card').style.display !== 'none') {
     renderResult(currentBird, lastConfidence);
-  }
-  // Re-render tab content
-  if (currentBird) {
+  } else if (currentBird) {
     renderTabContent(currentTab);
   }
 }
@@ -159,40 +163,29 @@ function setLanguage(lang) {
   }
 }
 
-// ── Navigation ────────────────────────────────────────────────────────────────
+// ── Навигация ──────────────────────────────────────────────────────────────────
 function showView(view) {
   ['home', 'collection', 'about'].forEach(v => {
-    const el = document.getElementById(`view-${v}`);
-    if (el) el.style.display = v === view ? '' : 'none';
+    document.getElementById(`view-${v}`).style.display = v === view ? '' : 'none';
   });
   document.querySelectorAll('.nav-btn').forEach(btn => {
     const id = btn.id.replace('nav-', '');
     btn.classList.toggle('active', id === view || (view === 'home' && id === 'identify'));
   });
-  if (view === 'collection') {
-    renderBirdGrid();
-  }
+  if (view === 'collection') renderBirdGrid();
 }
 
-// ── File Upload ───────────────────────────────────────────────────────────────
+// ── Загрузка файла ────────────────────────────────────────────────────────────
 function initUpload() {
   const area = document.getElementById('upload-area');
   const input = document.getElementById('file-input');
-  const chooseBtn = document.getElementById('choose-btn');
-  const changeBtn = document.getElementById('change-btn');
 
-  chooseBtn.addEventListener('click', e => { e.stopPropagation(); input.click(); });
-  changeBtn.addEventListener('click', e => { e.stopPropagation(); input.click(); });
+  document.getElementById('choose-btn').addEventListener('click', e => { e.stopPropagation(); input.click(); });
+  document.getElementById('change-btn').addEventListener('click', e => { e.stopPropagation(); input.click(); });
   area.addEventListener('click', () => { if (!selectedFile) input.click(); });
+  input.addEventListener('change', () => { if (input.files[0]) setFile(input.files[0]); });
 
-  input.addEventListener('change', () => {
-    if (input.files[0]) setFile(input.files[0]);
-  });
-
-  area.addEventListener('dragover', e => {
-    e.preventDefault();
-    area.classList.add('drag-over');
-  });
+  area.addEventListener('dragover', e => { e.preventDefault(); area.classList.add('drag-over'); });
   area.addEventListener('dragleave', () => area.classList.remove('drag-over'));
   area.addEventListener('drop', e => {
     e.preventDefault();
@@ -212,13 +205,10 @@ function setFile(file) {
     document.getElementById('identify-btn').disabled = false;
   };
   reader.readAsDataURL(file);
-  // Hide previous results
   hideAll(['loading-state', 'result-card', 'error-state']);
 }
 
-// ── Identify ──────────────────────────────────────────────────────────────────
-let lastConfidence = 0;
-
+// ── Определение птицы ─────────────────────────────────────────────────────────
 async function identify() {
   if (!selectedFile) return;
 
@@ -232,22 +222,22 @@ async function identify() {
   try {
     const res = await fetch('/api/identify', { method: 'POST', body: formData });
     const data = await res.json();
-
     hide('loading-state');
 
     if (!res.ok || data.error) {
-      showError(data.error || 'Identification failed. Please try again.');
+      showError(data.error || 'Не удалось определить птицу. Попробуйте другое фото.');
       return;
     }
 
     currentBird = data.bird;
     lastConfidence = data.confidence;
+    currentTab = 'facts';
     renderResult(data.bird, data.confidence, data.demo);
     show('result-card');
     document.getElementById('result-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   } catch (err) {
     hide('loading-state');
-    showError('Network error. Please check your connection.');
+    showError('Ошибка сети. Проверьте подключение к интернету.');
   } finally {
     document.getElementById('identify-btn').disabled = false;
   }
@@ -255,24 +245,35 @@ async function identify() {
 
 function renderResult(bird, confidence, demo = false) {
   const lang = currentLang;
-  document.getElementById('result-common-name').textContent = bird.name[lang] || bird.name.en;
+  document.getElementById('result-common-name').textContent = bird.name[lang] || bird.name.ru;
   document.getElementById('result-sci-name').textContent = bird.scientific_name;
   document.getElementById('result-status').textContent = bird.status;
   document.getElementById('result-description').textContent =
-    (bird.description && bird.description[lang]) || bird.description?.en || '';
+    bird.description?.[lang] || bird.description?.ru || '';
   document.getElementById('confidence-badge').textContent =
-    demo ? `DEMO MODE` : `${confidence}% ${t('confidence_label')}`;
+    demo ? 'ДЕМО' : `${confidence}% ${t('confidence_label')}`;
 
   const img = document.getElementById('result-bird-img');
   img.src = bird.image;
   img.onerror = () => { img.src = getPlaceholderSvg(bird.id); };
 
-  // Activate tabs
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === currentTab);
-    btn.addEventListener('click', function() {
+  // Перерисовываем вкладки
+  const tabsEl = document.querySelector('.result-tabs');
+  tabsEl.innerHTML = [
+    ['facts', t('tab_facts')],
+    ['habitat', t('tab_habitat')],
+    ['diet', t('tab_diet')],
+    ['threats', t('tab_threats')],
+    ['conservation', t('tab_help')],
+    ['do_not', t('tab_do_not')],
+  ].map(([tab, label]) =>
+    `<button class="tab-btn${currentTab === tab ? ' active' : ''}" data-tab="${tab}">${label}</button>`
+  ).join('');
+
+  tabsEl.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
       currentTab = this.dataset.tab;
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      tabsEl.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       renderTabContent(currentTab);
     });
@@ -287,21 +288,26 @@ function renderTabContent(tab) {
   const el = document.getElementById('tab-content');
 
   if (tab === 'facts') {
-    const items = currentBird.facts?.[lang] || currentBird.facts?.en || [];
+    const items = currentBird.facts?.[lang] || currentBird.facts?.ru || [];
     el.innerHTML = `<ul>${items.map(f => `<li>${f}</li>`).join('')}</ul>`;
+  } else if (tab === 'do_not') {
+    const text = currentBird.do_not?.[lang] || currentBird.do_not?.ru || '';
+    // Разбиваем по точкам на отдельные пункты
+    const items = text.split('. ').filter(s => s.trim());
+    el.innerHTML = `<ul class="do-not-list">${items.map(f => `<li>${f.replace(/\.$/, '')}.</li>`).join('')}</ul>`;
   } else {
-    const text = currentBird[tab]?.[lang] || currentBird[tab]?.en || '';
+    const text = currentBird[tab]?.[lang] || currentBird[tab]?.ru || '';
     el.innerHTML = `<p>${text}</p>`;
   }
 }
 
-// ── Bird Grid ─────────────────────────────────────────────────────────────────
+// ── Коллекция ─────────────────────────────────────────────────────────────────
 async function loadBirds() {
   try {
     const res = await fetch('/api/birds');
     birdsData = await res.json();
   } catch (e) {
-    console.error('Failed to load birds:', e);
+    console.error('Не удалось загрузить список птиц:', e);
   }
 }
 
@@ -311,12 +317,12 @@ function renderBirdGrid() {
   const lang = currentLang;
 
   grid.innerHTML = birdsData.map(bird => {
-    const name = bird.name[lang] || bird.name.en;
+    const name = bird.name[lang] || bird.name.ru;
     return `
       <div class="bird-card" onclick="openModal('${bird.id}')">
         <div class="bird-card-img">
           <img src="${bird.image}" alt="${name}"
-               onerror="this.parentElement.innerHTML='${getBirdEmoji(bird.id)}'">
+               onerror="this.parentElement.innerHTML='<span style=\\"font-size:48px\\">${getBirdEmoji(bird.id)}</span>'">
         </div>
         <div class="bird-card-body">
           <div class="bird-card-name">${name}</div>
@@ -327,20 +333,24 @@ function renderBirdGrid() {
   }).join('');
 }
 
-// ── Modal ─────────────────────────────────────────────────────────────────────
+// ── Модальное окно ────────────────────────────────────────────────────────────
 function openModal(birdId) {
   const bird = birdsData.find(b => b.id === birdId);
   if (!bird) return;
   const lang = currentLang;
-  const name = bird.name[lang] || bird.name.en;
+  const name = bird.name[lang] || bird.name.ru;
 
-  const facts = (bird.facts?.[lang] || bird.facts?.en || [])
+  const facts = (bird.facts?.[lang] || bird.facts?.ru || [])
     .map(f => `<li>${f}</li>`).join('');
+
+  const doNotText = bird.do_not?.[lang] || bird.do_not?.ru || '';
+  const doNotItems = doNotText.split('. ').filter(s => s.trim())
+    .map(f => `<li>${f.replace(/\.$/, '')}.</li>`).join('');
 
   document.getElementById('modal-content').innerHTML = `
     <div class="modal-header">
       <img src="${bird.image}" alt="${name}"
-           onerror="this.src='${getPlaceholderSvgInline(bird.id)}'">
+           onerror="this.style.display='none'">
       <div>
         <h2>${name}</h2>
         <p class="sci">${bird.scientific_name}</p>
@@ -348,26 +358,31 @@ function openModal(birdId) {
       </div>
     </div>
     <div class="modal-body">
-      <p>${bird.description?.[lang] || bird.description?.en || ''}</p>
+      <p>${bird.description?.[lang] || bird.description?.ru || ''}</p>
+
       <div class="modal-section">
         <h3>${t('modal_facts')}</h3>
         <ul>${facts}</ul>
       </div>
       <div class="modal-section">
         <h3>${t('modal_habitat')}</h3>
-        <p>${bird.habitat?.[lang] || bird.habitat?.en || ''}</p>
+        <p>${bird.habitat?.[lang] || bird.habitat?.ru || ''}</p>
       </div>
       <div class="modal-section">
         <h3>${t('modal_diet')}</h3>
-        <p>${bird.diet?.[lang] || bird.diet?.en || ''}</p>
+        <p>${bird.diet?.[lang] || bird.diet?.ru || ''}</p>
       </div>
       <div class="modal-section">
         <h3>${t('modal_threats')}</h3>
-        <p>${bird.threats?.[lang] || bird.threats?.en || ''}</p>
+        <p>${bird.threats?.[lang] || bird.threats?.ru || ''}</p>
       </div>
-      <div class="modal-section">
+      <div class="modal-section modal-section--help">
         <h3>${t('modal_help')}</h3>
-        <p>${bird.conservation?.[lang] || bird.conservation?.en || ''}</p>
+        <p>${bird.conservation?.[lang] || bird.conservation?.ru || ''}</p>
+      </div>
+      <div class="modal-section modal-section--donot">
+        <h3>⚠️ ${t('modal_do_not')}</h3>
+        <ul>${doNotItems}</ul>
       </div>
     </div>`;
 
@@ -380,7 +395,7 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// ── Utilities ─────────────────────────────────────────────────────────────────
+// ── Утилиты ───────────────────────────────────────────────────────────────────
 function show(id) { const el = document.getElementById(id); if (el) el.style.display = ''; }
 function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
 function hideAll(ids) { ids.forEach(hide); }
@@ -394,36 +409,34 @@ function getPlaceholderSvg(id) {
   return `data:image/svg+xml,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
       <rect width="100" height="100" fill="#D8F3DC"/>
-      <text x="50" y="60" text-anchor="middle" font-size="40">${getBirdEmoji(id)}</text>
+      <text x="50" y="62" text-anchor="middle" font-size="44">${getBirdEmoji(id)}</text>
     </svg>`
   )}`;
 }
 
-function getPlaceholderSvgInline(id) {
-  return getPlaceholderSvg(id).replace(/"/g, "'");
-}
-
 function getBirdEmoji(id) {
-  const emojis = {
+  const e = {
     rock_pigeon: '🕊️', house_sparrow: '🐦', common_myna: '🐦',
     eurasian_collared_dove: '🕊️', mallard: '🦆', eurasian_coot: '🦢',
     common_kestrel: '🦅', black_kite: '🦅', chukar_partridge: '🐔',
-    common_pheasant: '🦃', rook: '🐦‍⬛'
+    common_pheasant: '🦃', rook: '🐦'
   };
-  return emojis[id] || '🐦';
+  return e[id] || '🐦';
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// ── Инициализация ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  // Language buttons
+  // Кнопки языка
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
   });
+  // Установить активную кнопку языка
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
 
-  // Identify button
   document.getElementById('identify-btn').addEventListener('click', identify);
 
-  // New photo button
   document.getElementById('new-photo-btn').addEventListener('click', () => {
     selectedFile = null;
     currentBird = null;
@@ -436,15 +449,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('upload-area').scrollIntoView({ behavior: 'smooth' });
   });
 
-  // Retry button
-  document.getElementById('retry-btn').addEventListener('click', () => {
-    hide('error-state');
-  });
-
-  // Keyboard: close modal with Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
+  document.getElementById('retry-btn').addEventListener('click', () => hide('error-state'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   initUpload();
   await loadBirds();
