@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+uploads/
+dataset/
+*.zip
+*.h5
+*.keras
+venv/
+.venv/
+*.DS_Store

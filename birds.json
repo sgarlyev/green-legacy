@@ -1,0 +1,411 @@
+{
+  "birds": [
+    {
+      "id": "rock_pigeon",
+      "name": {"en": "Rock Pigeon", "ru": "Сизый голубь", "tk": "Çal kepderisi"},
+      "scientific_name": "Columba livia",
+      "status": "Least Concern",
+      "image": "/static/images/birds/rock_pigeon.jpg",
+      "description": {
+        "en": "The Rock Pigeon is one of the world's most familiar birds, found on every continent except Antarctica. In Turkmenistan, it thrives in cities and rocky landscapes.",
+        "ru": "Сизый голубь — одна из самых известных птиц мира, встречающаяся на всех континентах, кроме Антарктиды. В Туркменистане он обитает в городах и скалистых ландшафтах.",
+        "tk": "Çal kepderisi dünýäde iň tanymal guşlaryň biri bolup, Antarktidadan başga ähli yklymda duşulýar. Türkmenistanda şäherlerde we gaýaly ýerlerde ýaşaýar."
+      },
+      "facts": {
+        "en": ["Can navigate home from distances over 1800 km", "Has been used as a messenger bird for thousands of years", "Produces 'crop milk' to feed chicks", "Mates for life and both parents raise chicks", "Can fly at speeds up to 148 km/h"],
+        "ru": ["Способен вернуться домой с расстояния более 1800 км", "Тысячелетиями использовался как почтовая птица", "Вырабатывает 'зоб-молоко' для кормления птенцов", "Создаёт пару на всю жизнь, оба родителя воспитывают птенцов", "Может летать со скоростью до 148 км/ч"],
+        "tk": ["1800 km-den gowrak uzaklykdan öýüne dolanyp bilýär", "Müňlerçe ýyl bäri habarçy guş hökmünde ulanylýar", "Jüýjeleri iýmitlendirmek üçin 'iýmit haltasy süýdi' öndürýär", "Ömür boýy jübüt bolýar, iki ata-ene hem jüýjeleri ulaldýar", "Sagadyna 148 km çenli tizlikde uçup bilýär"]
+      },
+      "habitat": {
+        "en": "Urban areas, cliffs, rocky terrain, farms. Originally cliff-dwelling, now fully adapted to city buildings as artificial cliffs.",
+        "ru": "Городские районы, скалы, каменистые местности, фермы. Изначально обитал на скалах, теперь полностью адаптирован к городским зданиям как искусственным скалам.",
+        "tk": "Şäher ýerleri, gaýalar, daşly ýerler, fermalar. Asyl ýaşaýyş ýeri gaýalar bolup, indi emeli gaýalar hökmünde şäher binalaryna doly uýgunlaşdy."
+      },
+      "diet": {
+        "en": "Seeds, grains, fruits, berries. Urban pigeons also eat bread and scraps.",
+        "ru": "Семена, зерна, фрукты, ягоды. Городские голуби также едят хлеб и объедки.",
+        "tk": "Tohumlar, däneler, miweler, ir-iýmişler. Şäher kepderileri çörek we galyndylary hem iýýär."
+      },
+      "threats": {
+        "en": "Habitat loss in natural cliff areas, pesticide use, hunting in some regions, pollution.",
+        "ru": "Потеря мест обитания в естественных скалистых районах, применение пестицидов, охота в некоторых регионах, загрязнение.",
+        "tk": "Tebigy gaýaly ýerlerde ýaşaýyş ýerleriniň ýitmegi, pestisidleriň ulanylmagy, käbir sebitlerde aw etmek, hapalanma."
+      },
+      "conservation": {
+        "en": "Avoid feeding bread to pigeons — it's nutritionally poor. Support urban wildlife programs. Report injured birds to local wildlife centers.",
+        "ru": "Не кормите голубей хлебом — он не питателен. Поддерживайте программы городской дикой природы. Сообщайте о раненых птицах в местные центры дикой природы.",
+        "tk": "Kepderileri çörek bilen iýmitlendirmäň — ol iýmit bahasy pes. Şäher ýabany tebigat programmalaryny goldaň. Ýaralanan guşlar hakynda ýerli ýabany tebigat merkezlerine habar beriň."
+      }
+    },
+    {
+      "id": "house_sparrow",
+      "name": {"en": "House Sparrow", "ru": "Домовой воробей", "tk": "Öý serçesi"},
+      "scientific_name": "Passer domesticus",
+      "status": "Least Concern",
+      "image": "/static/images/birds/house_sparrow.jpg",
+      "description": {
+        "en": "The House Sparrow is perhaps the most widespread wild bird on Earth, closely associated with human settlements. In Turkmenistan, it's a common sight in gardens and city streets.",
+        "ru": "Домовой воробей, пожалуй, самая широко распространённая дикая птица на Земле, тесно связанная с человеческими поселениями. В Туркменистане он часто встречается в садах и городских улицах.",
+        "tk": "Öý serçesi Ýerdäki iň giňden ýaýran ýabany guşlaryň biri bolup, adam oturymly ýerleri bilen ýakyndan baglanyşyklydyr. Türkmenistanda baglarda we şäher köçelerinde köp duşulýar."
+      },
+      "facts": {
+        "en": ["Has lived alongside humans for at least 10,000 years", "Males have a black bib — bigger bib means higher social status", "Takes dust baths to control parasites", "Can produce 2–4 clutches per year", "Populations have declined 60% in Europe since 1980"],
+        "ru": ["Живёт рядом с людьми не менее 10 000 лет", "У самцов чёрный нагрудник — больший нагрудник означает более высокий социальный статус", "Купается в пыли для борьбы с паразитами", "Может производить 2–4 кладки в год", "Численность в Европе сократилась на 60% с 1980 года"],
+        "tk": ["Azyndan 10 000 ýyl bäri adamlaryň gapdalynda ýaşaýar", "Erkekleriniň gara 'boýunduryklary' bar — ulurak boýunduruk has ýokary sosial derejäni aňladýar", "Parazitleri ýok etmek üçin tozan hammamyny alýar", "Ýylda 2–4 gezek ýumurtga basdyryp bilýär", "Ýewropada ilaty 1980-nji ýyldan bäri 60% azaldy"]
+      },
+      "habitat": {
+        "en": "Urban and suburban areas, farms, gardens. Almost always near human settlements.",
+        "ru": "Городские и пригородные районы, фермы, сады. Почти всегда вблизи человеческих поселений.",
+        "tk": "Şäher we şäher etegi ýerler, fermalar, baglar. Diýen ýaly hemişe adam oturymly ýerleriň golaýynda."
+      },
+      "diet": {
+        "en": "Seeds, grains, insects (especially for feeding chicks), berries, scraps.",
+        "ru": "Семена, зерна, насекомые (особенно для кормления птенцов), ягоды, объедки.",
+        "tk": "Tohumlar, däneler, mör-möjekler (esasan jüýjeleri iýmitlendirmek üçin), ir-iýmişler, galyndylar."
+      },
+      "threats": {
+        "en": "Loss of nesting sites in modern buildings, reduced insect populations, pesticide use, cats.",
+        "ru": "Потеря гнездовых мест в современных зданиях, сокращение популяций насекомых, применение пестицидов, кошки.",
+        "tk": "Häzirki zaman binalarda höwürtge ýerleriniň ýitmegi, mör-möjekleriň azalmagy, pestisidleriň ulanylmagy, pişikler."
+      },
+      "conservation": {
+        "en": "Install sparrow nest boxes on buildings. Leave gaps under roof tiles for nesting. Reduce pesticide use in gardens. Plant native seed-producing plants.",
+        "ru": "Устанавливайте скворечники для воробьёв на зданиях. Оставляйте щели под черепицей для гнездования. Сокращайте применение пестицидов в садах. Сажайте местные семенные растения.",
+        "tk": "Binalarda serçeler üçin höwürtge gutuларyny guruň. Örtük astynda höwürtge üçin boşluklar goýuň. Baglarda pestisidleriň ulanylmagyny azaldyň. Ýerli tohumly ösümlikleri ekiň."
+      }
+    },
+    {
+      "id": "common_myna",
+      "name": {"en": "Common Myna", "ru": "Обыкновенная майна", "tk": "Adaty maýna"},
+      "scientific_name": "Acridotheres tristis",
+      "status": "Least Concern",
+      "image": "/static/images/birds/common_myna.jpg",
+      "description": {
+        "en": "The Common Myna is a highly intelligent bird known for its ability to mimic sounds. It has expanded its range into Central Asia and is now a familiar bird in Turkmenistan's cities.",
+        "ru": "Обыкновенная майна — высокоинтеллектуальная птица, известная способностью подражать звукам. Она расширила свой ареал в Центральную Азию и теперь является знакомой птицей в городах Туркменистана.",
+        "tk": "Adaty maýna sesleri öýkünmek ukyby bilen tanalýan örän akylly guşdur. Ol öz ýaşaýyş çägini Orta Aziýa çenli giňeldip, indi Türkmenistanyň şäherlerinde tanyş guşa öwrüldi."
+      },
+      "facts": {
+        "en": ["Can mimic human speech, other birds, and even machines", "Declared one of the world's 100 worst invasive species", "Forms large communal roosts of thousands of birds", "Highly territorial and aggressive toward other species", "Lives up to 12 years in the wild"],
+        "ru": ["Может подражать человеческой речи, другим птицам и даже машинам", "Признана одним из 100 худших инвазивных видов мира", "Образует большие общие ночёвки из тысяч птиц", "Очень территориальна и агрессивна по отношению к другим видам", "Живёт до 12 лет в дикой природе"],
+        "tk": ["Adam gepini, başga guşlary we hatda maşynlary öýkünip bilýär", "Dünýäniň 100 iň erbet basybalyjy görnüşleriniň biri diýlip yglan edildi", "Müňlerçe guşdan ybarat uly jemgyýetçilik şähliklerini döredýär", "Başga görnüşlere garşy örän territorial we agressiw", "Ýabany tebigatda 12 ýyla çenli ýaşaýar"]
+      },
+      "habitat": {
+        "en": "Urban areas, farmland, gardens, open woodland near settlements.",
+        "ru": "Городские районы, сельскохозяйственные угодья, сады, открытые леса вблизи поселений.",
+        "tk": "Şäher ýerleri, ekerançylyk ýerleri, baglar, oturymly ýerleriň golaýyndaky açyk tokaý."
+      },
+      "diet": {
+        "en": "Omnivorous: insects, fruits, seeds, small reptiles, scraps, carrion.",
+        "ru": "Всеядна: насекомые, фрукты, семена, мелкие пресмыкающиеся, объедки, падаль.",
+        "tk": "Hemme zat iýiji: mör-möjekler, miweler, tohumlar, kiçi süýrenjiler, galyndylar, leş."
+      },
+      "threats": {
+        "en": "As an invasive species, mynas threaten native birds by competing for nest holes and food. Habitat loss affects them less than native species.",
+        "ru": "Как инвазивный вид, майна угрожает местным птицам, конкурируя за гнездовые отверстия и пищу. Потеря среды обитания затрагивает их меньше, чем местные виды.",
+        "tk": "Basybalyjy görnüş hökmünde maýnalar höwürtge deşikleri we iýmit üçin bäsleşip, ýerli guşlara howp salýar. Ýaşaýyş ýerleriniň ýitmegi ýerli görnüşlere garanda olara az täsir edýär."
+      },
+      "conservation": {
+        "en": "Support native bird nest box programs to help native species compete. Learn to distinguish mynas from native starlings.",
+        "ru": "Поддерживайте программы скворечников для местных птиц, чтобы помочь местным видам конкурировать. Учитесь отличать майну от местных скворцов.",
+        "tk": "Ýerli görnüşlere bäsleşmäge kömek etmek üçin ýerli guş höwürtge gutusy programmalaryny goldaň. Maýnany ýerli şpaklyklardan tapawutlandyrmagy öwreniň."
+      }
+    },
+    {
+      "id": "eurasian_collared_dove",
+      "name": {"en": "Eurasian Collared Dove", "ru": "Кольчатая горлица", "tk": "Ýakalyk ümürdowuk"},
+      "scientific_name": "Streptopelia decaocto",
+      "status": "Least Concern",
+      "image": "/static/images/birds/eurasian_collared_dove.jpg",
+      "description": {
+        "en": "The Eurasian Collared Dove has one of the most remarkable range expansions in ornithological history. Originally from the Indian subcontinent, it spread across Europe and Central Asia in just decades.",
+        "ru": "Кольчатая горлица имеет одно из самых замечательных расширений ареала в истории орнитологии. Родом с Индийского субконтинента, она распространилась по Европе и Центральной Азии всего за несколько десятилетий.",
+        "tk": "Ýakalyk ümürdowuk ornito­logiýa taryhyndaky iň geň ýaýraýyş giňişligine eýe. Asyl Hindi ýarym adasyndan gelip, diňe onýyllyklaryň içinde Ýewropa we Orta Aziýa ýaýrady."
+      },
+      "facts": {
+        "en": ["Spread from Turkey to UK in just 20 years (1930s–1950s)", "Named for the black half-collar on the nape", "Can raise up to 6 broods per year", "Produces a distinctive 3-note 'coo-COO-coo' call", "Highly successful colonizer of new territories"],
+        "ru": ["Распространилась из Турции в Великобританию всего за 20 лет (1930-е–1950-е годы)", "Названа в честь чёрного полукольца на затылке", "Может воспитывать до 6 выводков в год", "Издаёт характерный 3-нотный зов 'ку-КУ-ку'", "Весьма успешный колонизатор новых территорий"],
+        "tk": ["Türkiýeden Beýik Britaniýa bary-ýogy 20 ýylda ýaýrady (1930-1950-nji ýyllar)", "Ensesinдäki gara ýary halka adyndan alyndy", "Ýylda 6 gezege çenli jüýje çykaryp bilýär", "'kü-KÜ-kü' diýen aýratyn 3 notaly ses çykarýar", "Täze ýerleriň örän üstünlikli eýeleýjisi"]
+      },
+      "habitat": {
+        "en": "Urban gardens, parks, farmland, forest edges. Always near human habitation.",
+        "ru": "Городские сады, парки, сельскохозяйственные угодья, опушки леса. Всегда вблизи человеческого жилья.",
+        "tk": "Şäher baglary, seýilgähler, ekerançylyk ýerleri, tokaý gyralary. Hemişe adam ýaşaýan ýerleriň golaýynda."
+      },
+      "diet": {
+        "en": "Seeds, grains, berries. Occasionally insects and small invertebrates.",
+        "ru": "Семена, зерна, ягоды. Изредка насекомые и мелкие беспозвоночные.",
+        "tk": "Tohumlar, däneler, ir-iýmişler. Käwagtlar mör-möjekler we kiçi oňurgasyzlar."
+      },
+      "threats": {
+        "en": "Relatively secure, but faces pressure from predators (cats, birds of prey) and habitat loss in rural areas.",
+        "ru": "Относительно защищена, но испытывает давление со стороны хищников (кошек, хищных птиц) и потери среды обитания в сельских районах.",
+        "tk": "Görece ygtybarly, ýöne ýyrtyjylardan (pişikler, ýyrtyjy guşlar) we oba ýerlerinde ýaşaýyş ýerleriniň ýitmeginden basyş başdan geçirýär."
+      },
+      "conservation": {
+        "en": "Plant berry-producing shrubs in gardens. Provide bird feeders with seeds. Keep cats indoors during nesting season.",
+        "ru": "Сажайте кустарники с ягодами в садах. Обеспечьте кормушки с семенами. Держите кошек в помещении в период гнездования.",
+        "tk": "Baglarda ir-iýmiş berýän gyrymsy agaçlary ekiň. Tohumly guş iýmitlendirijilerini üpjün ediň. Höwürtge möwsüminde pişikleri içerde saklaň."
+      }
+    },
+    {
+      "id": "mallard",
+      "name": {"en": "Mallard", "ru": "Кряква", "tk": "Ýabany ördek"},
+      "scientific_name": "Anas platyrhynchos",
+      "status": "Least Concern",
+      "image": "/static/images/birds/mallard.jpg",
+      "description": {
+        "en": "The Mallard is the most familiar and widespread duck in the world and the ancestor of nearly all domestic duck breeds. In Turkmenistan, it breeds along rivers, lakes, and wetlands.",
+        "ru": "Кряква — самая знакомая и широко распространённая утка в мире и предок почти всех пород домашних уток. В Туркменистане она гнездится вдоль рек, озёр и водно-болотных угодий.",
+        "tk": "Ýabany ördek dünýäde iň tanymal we giňden ýaýran ördek bolup, diýen ýaly ähli öý ördek tohumlarының ata-babasy. Türkmenistanda derýalar, köllar we batgalyklar boýunça höwürtgeýär."
+      },
+      "facts": {
+        "en": ["Males (drakes) have distinctive iridescent green heads", "Females produce the classic 'quack' — males make a softer sound", "Can hybridize with many other duck species", "Migrates thousands of kilometers seasonally", "Uses a special bill structure to filter food from water"],
+        "ru": ["Самцы (селезни) имеют характерные переливчато-зелёные головы", "Самки издают классическое 'кряканье' — самцы производят более мягкий звук", "Могут скрещиваться со многими другими видами уток", "Сезонно мигрируют на тысячи километров", "Используют специальную структуру клюва для фильтрации пищи из воды"],
+        "tk": ["Erkekleriň (seleznleriň) aýratyn şöhle saçýan ýaşyl kellesi bar", "Urkaçylar klassik 'kwak' sesini çykarýar — erkekler has ýumşak ses çykarýar", "Köp başga ördek görnüşleri bilen garyşyp bilýär", "Möwsümleýin müňlerçe kilometre göç edýär", "Suwdan iýmit süzmek üçin ýörite çüňk gurluşyny ulanýar"]
+      },
+      "habitat": {
+        "en": "Lakes, rivers, ponds, wetlands, flooded fields. Tolerates both wild and urban water bodies.",
+        "ru": "Озёра, реки, пруды, болота, затопленные поля. Переносит как дикие, так и городские водоёмы.",
+        "tk": "Köllar, derýalar, howuzlar, batgalyklar, suw basgan meýdanlar. Ýabany we şäher suw howdanlaryna çydamlydyr."
+      },
+      "diet": {
+        "en": "Aquatic plants, seeds, insects, small fish, amphibians. Dabbles at the water surface.",
+        "ru": "Водные растения, семена, насекомые, мелкая рыба, земноводные. Кормится у поверхности воды.",
+        "tk": "Suw ösümlikleri, tohumlar, mör-möjekler, kiçi balyklar, amfibiler. Suwuň ýüzünde iýmit gözleýär."
+      },
+      "threats": {
+        "en": "Wetland drainage and loss, hunting pressure, water pollution, disturbance at nesting sites.",
+        "ru": "Осушение и потеря водно-болотных угодий, охотничье давление, загрязнение воды, беспокойство у гнездовых мест.",
+        "tk": "Batgalyklaryň guradylmagy we ýitmegi, aw edilmegi, suwuň hapalanmagy, höwürtge ýerlerinde bozulma."
+      },
+      "conservation": {
+        "en": "Protect and restore wetlands. Avoid disturbing nesting ducks in spring. Never feed bread to ducks — it causes 'angel wing' deformity. Use lead-free fishing equipment.",
+        "ru": "Охраняйте и восстанавливайте водно-болотные угодья. Избегайте беспокойства гнездящихся уток весной. Никогда не кормите уток хлебом — он вызывает деформацию 'ангельское крыло'. Используйте безгрузцовое рыболовное снаряжение.",
+        "tk": "Batgalyklary goraň we dikeldиň. Bahar möwsüminde höwürtgeleýän ördekleri biynjalyk etmekden gaça duruň. Ördeklere hiç wagt çörek iýmitlendirmäň — ol 'perişde ganaty' kemçiligini döredýär. Gurşunsyz balyk tutma enjamlaryny ulanyň."
+      }
+    },
+    {
+      "id": "eurasian_coot",
+      "name": {"en": "Eurasian Coot", "ru": "Лысуха", "tk": "Ýewraziýa agarly"},
+      "scientific_name": "Fulica atra",
+      "status": "Least Concern",
+      "image": "/static/images/birds/eurasian_coot.jpg",
+      "description": {
+        "en": "The Eurasian Coot is a bold, quarrelsome water bird instantly recognizable by its all-black plumage and distinctive white bill and forehead shield. Common on Turkmenistan's lakes and reservoirs.",
+        "ru": "Лысуха — смелая, драчливая водяная птица, мгновенно узнаваемая по полностью чёрному оперению и характерному белому клюву и лобному щитку. Обычна на озёрах и водохранилищах Туркменистана.",
+        "tk": "Ýewraziýa agarly, ähli gara ýelegi we aýratyn ak çüňki we maňlaý galygы bilen dessine tanalýan mert, jedelçil suw guşy. Türkmenistanyň köllary we suw howdanlarynda köp duşulýar."
+      },
+      "facts": {
+        "en": ["Its white bill gave rise to the phrase 'bald as a coot'", "Lobed (not webbed) toes make it an excellent swimmer", "Aggressively defends territory — will chase other birds and even humans", "Both parents care for chicks and carry them on their backs", "Can dive up to 4 meters to find food"],
+        "ru": ["Белый клюв породил выражение 'лысый как колено'", "Лопастные (не перепончатые) пальцы делают её отличным пловцом", "Агрессивно защищает территорию — будет преследовать других птиц и даже людей", "Оба родителя ухаживают за птенцами и носят их на спине", "Может нырять на глубину до 4 метров в поисках пищи"],
+        "tk": ["Onuň ak çüňki 'kel kimin kel' diýen söze sebäp boldy", "Lopastly (perdeli däl) barmaklary ony ajaýyp üzüjä öwürýär", "Öz ýerini agressiw goraýar — başga guşlary we hatda adamlary hem kowaýar", "Iki ata-ene hem jüýjelere ideg edýär we olary arkasynda göterýär", "Iýmit tapmak üçin 4 metre çenli çümüp bilýär"]
+      },
+      "habitat": {
+        "en": "Lakes, reservoirs, slow-moving rivers, reed beds, urban park ponds.",
+        "ru": "Озёра, водохранилища, медленнотекущие реки, тростниковые заросли, городские прудики в парках.",
+        "tk": "Köllar, suw howdanlary, haýal akýan derýalar, gamyşlyk ýerler, şäher seýilgäh howuzlary."
+      },
+      "diet": {
+        "en": "Aquatic vegetation, algae, seeds, insects, small fish, tadpoles.",
+        "ru": "Водная растительность, водоросли, семена, насекомые, мелкая рыба, головастики.",
+        "tk": "Suw ösümlikleri, suwotular, tohumlar, mör-möjekler, kiçi balyklar, gitgujuklar."
+      },
+      "threats": {
+        "en": "Wetland drainage, water pollution, disturbance during nesting. Lead poisoning from fishing weights.",
+        "ru": "Осушение болот, загрязнение воды, беспокойство во время гнездования. Отравление свинцом от рыболовных грузил.",
+        "tk": "Batgalyklaryň guradylmagy, suwuň hapalanmagy, höwürtgeleýän wagty bozulma. Balyk tutma agyrlyklaryndan gurşun zäherlenmesi."
+      },
+      "conservation": {
+        "en": "Preserve wetland habitats. Use lead-free fishing sinkers. Maintain clean water bodies. Avoid disturbing nesting birds in spring and summer.",
+        "ru": "Сохраняйте водно-болотные угодья. Используйте безгрузовые рыболовные грузила. Поддерживайте чистые водоёмы. Избегайте беспокойства гнездящихся птиц весной и летом.",
+        "tk": "Batgalyk ýaşaýyş ýerlerini goraň. Gurşunsyz balyk tutma sinkerlerini ulanyň. Arassa suw howdanlaryny saklaň. Ýaz we tomus aýlarynda höwürtgeleýän guşlary biynjalyk etmekden gaça duruň."
+      }
+    },
+    {
+      "id": "common_kestrel",
+      "name": {"en": "Common Kestrel", "ru": "Обыкновенная пустельга", "tk": "Adaty kesel"},
+      "scientific_name": "Falco tinnunculus",
+      "status": "Least Concern",
+      "image": "/static/images/birds/common_kestrel.jpg",
+      "description": {
+        "en": "The Common Kestrel is famous for its remarkable ability to hover in mid-air while hunting. This small falcon is one of the most recognizable raptors in Turkmenistan, often seen along roadsides.",
+        "ru": "Обыкновенная пустельга знаменита своей замечательной способностью зависать в воздухе во время охоты. Этот маленький сокол является одним из самых узнаваемых хищников Туркменистана, часто встречающимся вдоль дорог.",
+        "tk": "Adaty kesel aw edýän wagtynda howada asyllyp durmak ukyby bilen meşhurdyr. Bu kiçi laçyn Türkmenistanyň iň tanymal ýyrtyjy guşlarynyň biri bolup, köplenç ýol gyrasынda görünýär."
+      },
+      "facts": {
+        "en": ["Can see ultraviolet light, helping track vole urine trails", "Hovers with rapid wing beats facing into the wind", "Can spot a beetle from 50 meters away", "Male has grey head and tail; female is brown-barred", "Nests on cliff ledges, buildings, and old crow nests"],
+        "ru": ["Видит ультрафиолетовый свет, помогающий отслеживать следы мочи полёвок", "Зависает с быстрыми взмахами крыльев, развернувшись против ветра", "Может заметить жука с расстояния 50 метров", "У самца серая голова и хвост; у самки коричневые полосы", "Гнездится на карнизах скал, зданиях и старых вороньих гнёздах"],
+        "tk": ["Ultramelewşe yşygy görüp bilýär, bu mälemurediň peşew yzlaryny yzarlamaga kömek edýär", "Ýele garşy durup, çalt ganat kakyp howada asyllyp durýar", "50 metr uzaklykdan möjek görüp bilýär", "Erkegiň başy we guýrugy çal; urkaçy goňur zolaklydyr", "Gaýa gapdalarynda, binalarda we garry garga höwürtgelerinde höwürtgeýär"]
+      },
+      "habitat": {
+        "en": "Open countryside, farmland, roadsides, urban areas, cliffs. Avoids dense forests.",
+        "ru": "Открытая сельская местность, сельскохозяйственные угодья, обочины дорог, городские районы, скалы. Избегает густых лесов.",
+        "tk": "Açyk oba ýerleri, ekerançylyk ýerleri, ýol gyralary, şäher ýerleri, gaýalar. Dyk tokaýlardan gaça durýar."
+      },
+      "diet": {
+        "en": "Small mammals (voles, mice), large insects, earthworms, small birds, lizards.",
+        "ru": "Мелкие млекопитающие (полёвки, мыши), крупные насекомые, дождевые черви, мелкие птицы, ящерицы.",
+        "tk": "Kiçi süýdüşdiriji haýwanlar (mälemuredi, syçanlar), uly mör-möjekler, sülükler, kiçi guşlar, kertgenjekler."
+      },
+      "threats": {
+        "en": "Rodenticide poisoning (secondary poisoning from eating poisoned prey), loss of open grassland, reduction in insect populations.",
+        "ru": "Отравление родентицидами (вторичное отравление от поедания отравленной добычи), потеря открытых лугов, сокращение популяций насекомых.",
+        "tk": "Rodentisid bilen zäherlenmek (zäherlenen awa iýmekden ikincil zäherlenmek), açyk çöllügiň ýitmegi, mör-möjek ilat sanynуň azalmagy."
+      },
+      "conservation": {
+        "en": "Install kestrel nest boxes on buildings and poles. Avoid rodenticides — use traps instead. Maintain grass margins on farmland for vole habitat.",
+        "ru": "Устанавливайте скворечники для пустельги на зданиях и столбах. Избегайте родентицидов — используйте ловушки. Поддерживайте травянистые обочины на сельскохозяйственных угодьях для среды обитания полёвок.",
+        "tk": "Binalarda we sütünlerde kesel höwürtge gutuларyny guruň. Rodentisidlerden gaça duruň — deregine duzak ulanyň. Mälemuredi ýaşaýyş ýeri üçin ekerançylyk ýerlerinde ot gyra zolaklaryny saklaň."
+      }
+    },
+    {
+      "id": "black_kite",
+      "name": {"en": "Black Kite", "ru": "Чёрный коршун", "tk": "Gara çil"},
+      "scientific_name": "Milvus migrans",
+      "status": "Least Concern",
+      "image": "/static/images/birds/black_kite.jpg",
+      "description": {
+        "en": "The Black Kite is one of the world's most abundant raptors, recognizable by its forked tail and effortless soaring. In Turkmenistan it's a common sight over rivers, rubbish dumps, and fishing areas.",
+        "ru": "Чёрный коршун — один из самых многочисленных хищников мира, узнаваемый по раздвоенному хвосту и лёгкому парению. В Туркменистане его часто видят над реками, свалками и рыболовными угодьями.",
+        "tk": "Gara çil dünýäniň iň köp ýaýran ýyrtyjy guşlarynyň biri bolup, çäňeli guýrugy we az güýç sarp edip süýşmegi bilen tanalýar. Türkmenistanda derýalaryň, zibil zyňyndylarynyň we balykçylyk ýerleriniň üstünde köp görünýär."
+      },
+      "facts": {
+        "en": ["Can carry burning sticks to spread fire and flush out prey (observed in Australia)", "Often robs food directly from other birds in flight", "Forked tail helps it maneuver precisely at low speed", "One of the few raptors that thrives near human rubbish", "Migrates in huge flocks of thousands of birds"],
+        "ru": ["Может переносить горящие ветки, чтобы распространить огонь и выгнать добычу (наблюдалось в Австралии)", "Часто отбирает пищу прямо у других птиц в полёте", "Раздвоенный хвост помогает точно маневрировать на малой скорости", "Один из немногих хищников, процветающих вблизи человеческих свалок", "Мигрирует огромными стаями из тысяч птиц"],
+        "tk": ["Awyny kowmak üçin ot ýaýratmak üçin ýanýan çöp göterip bilýär (Awstraliýada synlandy)", "Uçuşda beýleki guşlardan iýmit ogurlaýar", "Çäňeli guýruk pes tizlikde takyk manerw etmäge kömek edýär", "Adam zibil zyňyndy ýerleriниň golaýynda ösdüp ýetişen az sanly ýyrtyjylaryň biri", "Müňlerçe guşdan ybarat uly süürülerde göç edýär"]
+      },
+      "habitat": {
+        "en": "Riverbanks, wetlands, rubbish dumps, fishing ports, open woodland, urban fringes.",
+        "ru": "Берега рек, водно-болотные угодья, свалки, рыболовные порты, открытые леса, городские окраины.",
+        "tk": "Derýa kenarlary, batgalyklar, zibil zyňyndy ýerleri, balykçylyk portlary, açyk tokaý, şäher gyralary."
+      },
+      "diet": {
+        "en": "Carrion, fish, small mammals, insects, garbage, food scraps.",
+        "ru": "Падаль, рыба, мелкие млекопитающие, насекомые, мусор, пищевые отходы.",
+        "tk": "Leş, balyk, kiçi süýdüşdiriji haýwanlar, mör-möjekler, zibil, iýmit galyndylary."
+      },
+      "threats": {
+        "en": "Poisoning from ingesting poisoned bait or lead from carcasses, habitat loss along rivers, illegal shooting.",
+        "ru": "Отравление от поглощения отравленной приманки или свинца из туш, потеря среды обитания вдоль рек, незаконная стрельба.",
+        "tk": "Zäherlenen jem ýa-da leşlerden gurşun ýutmakdan zäherlenmek, derýalar boýunça ýaşaýyş ýerleriniň ýitmegi, bikanun ok atmak."
+      },
+      "conservation": {
+        "en": "Dispose of waste responsibly to reduce toxic contamination. Never use poisoned bait for pest control. Report illegal raptor shooting to authorities.",
+        "ru": "Ответственно утилизируйте отходы для уменьшения токсического загрязнения. Никогда не используйте отравленные приманки для борьбы с вредителями. Сообщайте о незаконной стрельбе по хищным птицам властям.",
+        "tk": "Zäherli hapalanmany azaltmak üçin galyndylary jogapkärçilikli zyňyň. Zyýanly haýwanlar bilen göreşmek üçin hiç wagt zäherlenen jem ulanmaň. Ýyrtyjy guşlara garşy bikanun ok atmagy häkimiýetlere habar beriň."
+      }
+    },
+    {
+      "id": "chukar_partridge",
+      "name": {"en": "Chukar Partridge", "ru": "Кеклик", "tk": "Keklik"},
+      "scientific_name": "Alectoris chukar",
+      "status": "Least Concern",
+      "image": "/static/images/birds/chukar_partridge.jpg",
+      "description": {
+        "en": "The Chukar Partridge is Turkmenistan's iconic game bird, living in rocky hills and mountains. Its distinctive 'chuk-chuk-chukar' call echoes across the stony slopes of the Kopet Dag mountains.",
+        "ru": "Кеклик — знаковая охотничья птица Туркменистана, обитающая в скалистых холмах и горах. Его характерный призыв 'чук-чук-чукар' разносится по каменистым склонам гор Копетдаг.",
+        "tk": "Keklik Türkmenistanyň simwoliki aw guşy bolup, daşly depelerde we daglarда ýaşaýar. Onuň aýratyn 'çuk-çuk-çukar' sesi Köpetdag daglarynуň daşly eňňitlerinde ýaňlanýar."
+      },
+      "facts": {
+        "en": ["National bird of several countries including Pakistan and Afghanistan", "Prefers to run rather than fly when threatened", "Can live without water for days by eating dew from plants", "Males have striking black and white facial stripes", "Introduced as game birds across North America and Europe"],
+        "ru": ["Национальная птица нескольких стран, включая Пакистан и Афганистан", "При угрозе предпочитает бежать, а не летать", "Может обходиться без воды несколько дней, поедая росу с растений", "У самцов характерные черно-белые полосы на лице", "Завезён как охотничья птица в Северную Америку и Европу"],
+        "tk": ["Päkistan we Owganystan ýaly birnäçe ýurduň milli guşy", "Howp abandyrlanda uçmakdan ozal ylgamagy gowy görýär", "Ösümliklerden çyk içip, günlerce suwsuz ýaşap bilýär", "Erkekleriň aýratyn gara we ak ýüz zolaklary bar", "Demirgazyk Amerika we Ýewropa aw guşy hökmünde getirildi"]
+      },
+      "habitat": {
+        "en": "Rocky hillsides, mountain slopes, scrubland, arid and semi-arid terrain. Elevation 500–4000m.",
+        "ru": "Скалистые склоны холмов, горные склоны, кустарниковые заросли, засушливые и полузасушливые территории. Высота 500–4000 м.",
+        "tk": "Daşly depe eňňitleri, dag eňňitleri, çagyl toprakly ýerler, gurak we ýarym gurak arazi. Belentlik 500–4000 m."
+      },
+      "diet": {
+        "en": "Seeds, leaves, berries, insects, bulbs. Scratches ground to uncover food.",
+        "ru": "Семена, листья, ягоды, насекомые, луковицы. Разгребает землю для поиска пищи.",
+        "tk": "Tohumlar, ýapraklar, ir-iýmişler, mör-möjekler, sogan kökler. Iýmit tapmak üçin ýeri depeläp kazýar."
+      },
+      "threats": {
+        "en": "Overhunting, habitat degradation through overgrazing, predation by introduced predators, water scarcity.",
+        "ru": "Чрезмерная охота, деградация среды обитания из-за перевыпаса, хищничество завезённых хищников, нехватка воды.",
+        "tk": "Aşa köp aw etmek, aşa maldarçylyk sebäpli ýaşaýyş ýerleriniň ýaramazlaşmagy, getirilen ýyrtyjylaryň awlamagygy, suwuň gytçylygy."
+      },
+      "conservation": {
+        "en": "Support sustainable hunting regulations. Protect rocky hillside habitats from overgrazing. Maintain water sources in arid mountain areas.",
+        "ru": "Поддерживайте устойчивые охотничьи правила. Защищайте скалистые склоны от перевыпаса. Поддерживайте водоисточники в засушливых горных районах.",
+        "tk": "Durnukly aw düzgünlerini goldaň. Daşly depe ýaşaýyş ýerlerini aşa maldarçylykdan goraň. Gurak dag ýerlerinde suw çeşmelerini saklaň."
+      }
+    },
+    {
+      "id": "common_pheasant",
+      "name": {"en": "Common Pheasant", "ru": "Обыкновенный фазан", "tk": "Adaty güýjük"},
+      "scientific_name": "Phasianus colchicus",
+      "status": "Least Concern",
+      "image": "/static/images/birds/common_pheasant.jpg",
+      "description": {
+        "en": "The Common Pheasant is one of the most hunted birds in the world and has been introduced to every continent except Antarctica. In Turkmenistan, it's native to river deltas and dense riverine vegetation.",
+        "ru": "Обыкновенный фазан — одна из самых охотничьих птиц в мире, интродуцированная на всех континентах, кроме Антарктиды. В Туркменистане он является аборигенным видом в речных дельтах и густой прибрежной растительности.",
+        "tk": "Adaty güýjük dünýäde iň köp awlanýan guşlarynyň biri bolup, Antarktidadan başga ähli yklymda girizildi. Türkmenistanda derýa deltaларynda we dyk kenarýaka ösümliklerinde ýerli görnüş."
+      },
+      "facts": {
+        "en": ["Originates from the Caucasus and Central Asia — Turkmenistan is within its native range", "Males are spectacularly colourful with red facial wattles and long tails", "Can run at 30 km/h and burst fly at up to 90 km/h", "One male may mate with multiple females (polygynous)", "Over 50 million are released for shooting in the UK alone each year"],
+        "ru": ["Происходит с Кавказа и Центральной Азии — Туркменистан входит в его природный ареал", "Самцы эффектно окрашены с красными кожными складками на лице и длинными хвостами", "Может бежать со скоростью 30 км/ч и взлетать со скоростью до 90 км/ч", "Один самец может спариваться с несколькими самками (полигинный)", "Только в Великобритании ежегодно выпускают более 50 миллионов для охоты"],
+        "tk": ["Kawkaz we Orta Aziýadan gelip çykýar — Türkmenistan onuň ýerli ýaýraýyş çägiнде ýerleşýär", "Erkekler gyzyl ýüz örtükleri we uzyn guýrugy bilen ajaýyp reňkli", "Sagatda 30 km tizlikde ylgap we sagatda 90 km çenli tizlikde uçup bilýär", "Bir erkek birnäçe urkaçy bilen jübütleşip bilýär (köp aýallylyk)", "Diňe Beýik Britaniýada her ýyl 50 milliondan gowrak atyjylyk üçin goýberilýär"]
+      },
+      "habitat": {
+        "en": "Dense vegetation near water, reeds, river deltas, woodland edges, farmland with hedgerows.",
+        "ru": "Густая растительность вблизи воды, тростниковые заросли, речные дельты, опушки леса, сельскохозяйственные угодья с живыми изгородями.",
+        "tk": "Suwuň golaýyndaky dyk ösümlikler, gamyşlyklar, derýa deltaları, tokaý gyralary, çäkli oba ýerleri."
+      },
+      "diet": {
+        "en": "Seeds, grain, berries, insects, worms, small vertebrates.",
+        "ru": "Семена, зерно, ягоды, насекомые, черви, мелкие позвоночные.",
+        "tk": "Tohumlar, däne, ir-iýmişler, mör-möjekler, sülükler, kiçi oňurgalılar."
+      },
+      "threats": {
+        "en": "Habitat loss of riverine vegetation, overhunting, predation, wetland drainage in the Amu Darya and Murgab deltas.",
+        "ru": "Потеря прибрежной растительности, чрезмерная охота, хищничество, осушение водно-болотных угодий в дельтах Амударьи и Мургаба.",
+        "tk": "Kenarýaka ösümlikleriniň ýitmegi, aşa aw etmek, ýyrtyjylyk, Amyderýa we Murgap deltaларynda batgalyklaryň guradylmagy."
+      },
+      "conservation": {
+        "en": "Preserve riverine vegetation and wetlands. Support habitat restoration in Amu Darya delta. Enforce hunting quotas for native populations.",
+        "ru": "Сохраняйте прибрежную растительность и водно-болотные угодья. Поддерживайте восстановление среды обитания в дельте Амударьи. Соблюдайте квоты на охоту для местных популяций.",
+        "tk": "Kenarýaka ösümliklerini we batgalyklary goraň. Amyderýa deltasynda ýaşaýyş ýerlerini dikeltmegi goldaň. Ýerli ilatlar üçin aw kwotalaryny berjaý ediň."
+      }
+    },
+    {
+      "id": "rook",
+      "name": {"en": "Rook", "ru": "Грач", "tk": "Grač"},
+      "scientific_name": "Corvus frugilegus",
+      "status": "Least Concern",
+      "image": "/static/images/birds/rook.jpg",
+      "description": {
+        "en": "The Rook is a highly intelligent corvid and important part of the agricultural ecosystem. In Turkmenistan, large rook colonies nest in tall trees in cities and rural areas during spring.",
+        "ru": "Грач — высокоинтеллектуальный врановый и важная часть сельскохозяйственной экосистемы. В Туркменистане большие колонии грачей гнездятся на высоких деревьях в городах и сельских районах весной.",
+        "tk": "Grač garagarga maşgalasyndan örän akylly guş bolup, oba hojalyk ekosistemasynyň möhüm bölegidir. Türkmenistanda uly grač koloniýalary baharda şäherlerde we oba ýerlerinde uzyn agaçlarda höwürtgeýär."
+      },
+      "facts": {
+        "en": ["One of the most intelligent birds — can use and make tools", "Nests in noisy colonies called 'rookeries'", "Face turns grey-white as adult (bare skin around bill)", "Stores food underground in caches for winter", "Can live up to 20 years"],
+        "ru": ["Одна из самых умных птиц — может использовать и изготавливать инструменты", "Гнездится в шумных колониях, называемых 'грачевниками'", "Лицо взрослой особи становится серо-белым (голая кожа вокруг клюва)", "Запасает пищу под землёй на зиму", "Может прожить до 20 лет"],
+        "tk": ["Iň akylly guşlarynyň biri — gurallary ulanyp we ýasap bilýär", "'Ruk şäherlikleri' diýlip atlandyrylýan şowhunly koloniýalarda höwürtgeýär", "Ululygyň ýüzi çal-ak bolýar (çüňküň daşynda ýalaňaç deri)", "Gyş üçin iýmiti ýer astynda gizleýär", "20 ýyla çenli ýaşap bilýär"]
+      },
+      "habitat": {
+        "en": "Farmland, open woodland, urban parks, near tall trees for nesting. Often forages in freshly ploughed fields.",
+        "ru": "Сельскохозяйственные угодья, открытые леса, городские парки, рядом с высокими деревьями для гнездования. Часто кормится на свежевспаханных полях.",
+        "tk": "Ekerançylyk ýerleri, açyk tokaý, şäher seýilgähleri, höwürtgelmek üçin uzyn agaçlaryň golaýynda. Köplenç täze şüdüm edilmedik meýdanlarda iýmit gözleýär."
+      },
+      "diet": {
+        "en": "Earthworms, insects, grain, seeds, small vertebrates, carrion. Beneficial to farmers by eating pests.",
+        "ru": "Дождевые черви, насекомые, зерно, семена, мелкие позвоночные, падаль. Полезны для фермеров, поедая вредителей.",
+        "tk": "Sülükler, mör-möjekler, däne, tohumlar, kiçi oňurgalılar, leş. Zyýan berijileri iýip, daýhanlara peýdaly."
+      },
+      "threats": {
+        "en": "Pesticide use reducing invertebrate prey, loss of tall trees for nesting, persecution by farmers, climate change.",
+        "ru": "Применение пестицидов, сокращающее беспозвоночную добычу, потеря высоких деревьев для гнездования, преследование фермерами, изменение климата.",
+        "tk": "Pestisidleriň ulanylmagy oňurgasyz awlaryň azalmagyna sebäp bolýar, höwürtgelmek üçin uzyn agaçlaryň ýitmegi, daýhanlar tarapyndan yzarlanma, howa üýtgeýşi."
+      },
+      "conservation": {
+        "en": "Preserve tall trees near agricultural land. Reduce pesticide use to maintain earthworm populations. Appreciate rooks as natural pest controllers.",
+        "ru": "Сохраняйте высокие деревья вблизи сельскохозяйственных угодий. Сокращайте применение пестицидов для поддержания популяций дождевых червей. Цените грачей как естественных борцов с вредителями.",
+        "tk": "Ekerançylyk ýerleriniň golaýyndaky uzyn agaçlary goraň. Sülük ilat sanyny saklamak üçin pestisidleriň ulanylmagyny azaldyň. Graçlary tebigy zyýankeş gözegçileri hökmünde baha beriň."
+      }
+    }
+  ]
+}
