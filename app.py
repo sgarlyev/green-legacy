@@ -11,39 +11,46 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 INAT_API = "https://api.inaturalist.org/v1/computervision/score_image"
 HEADERS  = {"User-Agent": "GreenLegacy/1.0 (garlyevserdar1604@gmail.com)"}
 
-# Маппинг научных названий → наши ID
+# Маппинг: научное название → наш ID
 SCIENTIFIC_MAP = {
-    "milvus migrans":           "black_kite",
-    "alectoris chukar":         "chukar_partridge",
-    "falco tinnunculus":        "common_kestrel",
-    "acridotheres tristis":     "common_myna",
-    "phasianus colchicus":      "common_pheasant",
-    "streptopelia decaocto":    "eurasian_collared_dove",
-    "fulica atra":              "eurasian_coot",
-    "passer domesticus":        "house_sparrow",
-    "anas platyrhynchos":       "mallard",
-    "columba livia":            "rock_pigeon",
-    "corvus frugilegus":        "rook",
+    "milvus migrans": "black_kite",
+    "alectoris chukar": "chukar_partridge",
+    "falco tinnunculus": "common_kestrel",
+    "acridotheres tristis": "common_myna",
+    "phasianus colchicus": "common_pheasant",
+    "streptopelia decaocto": "eurasian_collared_dove",
+    "fulica atra": "eurasian_coot",
+    "passer domesticus": "house_sparrow",
+    "anas platyrhynchos": "mallard",
+    "columba livia": "rock_pigeon",
+    "corvus frugilegus": "rook",
 }
 
-# Маппинг общих английских названий (запасной вариант)
-COMMON_MAP = {
-    "black kite": "black_kite", "milvus migrans": "black_kite",
-    "chukar": "chukar_partridge", "chukar partridge": "chukar_partridge",
-    "common kestrel": "common_kestrel", "eurasian kestrel": "common_kestrel",
-    "kestrel": "common_kestrel",
-    "common myna": "common_myna", "common mynah": "common_myna", "myna": "common_myna",
-    "common pheasant": "common_pheasant", "ring-necked pheasant": "common_pheasant",
-    "pheasant": "common_pheasant",
-    "eurasian collared-dove": "eurasian_collared_dove",
-    "eurasian collared dove": "eurasian_collared_dove", "collared dove": "eurasian_collared_dove",
-    "eurasian coot": "eurasian_coot", "coot": "eurasian_coot",
-    "house sparrow": "house_sparrow", "sparrow": "house_sparrow",
-    "mallard": "mallard", "mallard duck": "mallard",
-    "rock pigeon": "rock_pigeon", "rock dove": "rock_pigeon",
-    "feral pigeon": "rock_pigeon", "pigeon": "rock_pigeon",
-    "rook": "rook",
-}
+# Маппинг: ключевое слово в названии → наш ID (для похожих видов)
+KEYWORD_MAP = [
+    # Майна и похожие
+    (["myna", "mynah", "acridotheres", "starling", "myna bird"], "common_myna"),
+    # Голубь и горлица
+    (["pigeon", "dove", "columba", "feral"], "rock_pigeon"),
+    # Кольчатая горлица конкретно
+    (["collared dove", "collared-dove", "streptopelia", "turtle dove"], "eurasian_collared_dove"),
+    # Воробей
+    (["sparrow", "passer"], "house_sparrow"),
+    # Кряква и утки
+    (["mallard", "duck", "anas", "drake", "teal"], "mallard"),
+    # Лысуха
+    (["coot", "fulica", "moorhen", "gallinule", "waterhen"], "eurasian_coot"),
+    # Пустельга и соколы
+    (["kestrel", "falco", "falcon", "hobby"], "common_kestrel"),
+    # Коршун
+    (["kite", "milvus", "black kite"], "black_kite"),
+    # Кеклик
+    (["chukar", "partridge", "alectoris", "francolin", "quail"], "chukar_partridge"),
+    # Фазан
+    (["pheasant", "phasianus", "peafowl"], "common_pheasant"),
+    # Грач и вороны
+    (["rook", "corvus", "crow", "raven", "jackdaw", "chough", "magpie"], "rook"),
+]
 
 CLASS_NAMES_PATH = os.path.join(os.path.dirname(__file__), 'models', 'class_names.json')
 with open(CLASS_NAMES_PATH) as f:
@@ -77,30 +84,25 @@ def identify_via_inat(image_bytes):
         data = resp.json()
         results = data.get("results", [])
 
-        # Перебираем топ-20 результатов iNaturalist
-        for item in results[:20]:
+        # Перебираем топ-30 результатов iNaturalist
+        for item in results[:30]:
             taxon = item.get("taxon", {})
             score = item.get("combined_score", 0)
+            sci    = taxon.get("name", "").lower()
+            common = taxon.get("preferred_common_name", "").lower()
+            search = f"{sci} {common}"
 
-            # Проверяем по научному названию
-            sci = taxon.get("name", "").lower()
+            # Точное научное название
             if sci in SCIENTIFIC_MAP:
                 return SCIENTIFIC_MAP[sci], score
 
-            # Проверяем по общему названию
-            common = taxon.get("preferred_common_name", "").lower()
-            if common in COMMON_MAP:
-                return COMMON_MAP[common], score
-
-            # Частичное совпадение
-            for key, bid in SCIENTIFIC_MAP.items():
-                if key in sci:
-                    return bid, score
-            for key, bid in COMMON_MAP.items():
-                if key in common and len(key) > 4:
+            # Ключевые слова — от конкретных к общим
+            for keywords, bid in KEYWORD_MAP:
+                if any(kw in search for kw in keywords):
                     return bid, score
 
-        print(f"iNat top3: {[(r.get('taxon',{}).get('name'), r.get('combined_score')) for r in results[:3]]}")
+        top3 = [(r.get('taxon',{}).get('name'), r.get('taxon',{}).get('preferred_common_name'), r.get('combined_score')) for r in results[:3]]
+        print(f"iNat no match, top3: {top3}")
         return None, 0
 
     except Exception as e:

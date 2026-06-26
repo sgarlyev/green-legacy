@@ -250,8 +250,14 @@ function renderResult(bird, confidence, demo = false) {
   document.getElementById('result-status').textContent = bird.status;
   document.getElementById('result-description').textContent =
     bird.description?.[lang] || bird.description?.ru || '';
-  document.getElementById('confidence-badge').textContent =
-    demo ? 'ДЕМО' : `${confidence}% ${t('confidence_label')}`;
+  const badge = document.getElementById('confidence-badge');
+  if (demo) {
+    badge.textContent = '⚠️ Нет совпадения';
+    badge.style.background = '#EF4444';
+  } else {
+    badge.textContent = `${confidence}% ${t('confidence_label')}`;
+    badge.style.background = '';
+  }
 
   const img = document.getElementById('result-bird-img');
   img.src = bird.image;
