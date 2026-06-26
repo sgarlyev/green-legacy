@@ -58,21 +58,29 @@ def identify_via_hf(image_bytes):
         headers["Authorization"] = f"Bearer {HF_TOKEN}"
     try:
         resp = requests.post(HF_API_URL, headers=headers,
-                             data=image_bytes, timeout=15)
+                             data=image_bytes, timeout=20)
+        print(f"HF status: {resp.status_code}")
         if resp.status_code == 200:
             results = resp.json()
+            print(f"HF results: {results[:5]}")
             if isinstance(results, list) and results:
-                for item in results[:10]:
+                for item in results[:15]:
                     label = item.get("label", "").lower().strip()
                     score = item.get("score", 0)
                     # Прямое совпадение
                     bird_id = BIRD_NAMES_MAP.get(label)
                     if bird_id:
+                        print(f"Matched: {label} -> {bird_id}")
                         return bird_id, score
-                    # Частичное совпадение
+                    # Частичное совпадение по каждому слову
                     for key, bid in BIRD_NAMES_MAP.items():
                         if key in label or label in key:
+                            print(f"Partial match: {label} -> {bid}")
                             return bid, score
+                # Нет совпадения — показываем что вернула модель
+                print(f"No match. Top label: {results[0].get('label')}")
+        else:
+            print(f"HF error: {resp.text[:200]}")
         return None, 0
     except Exception as e:
         print(f"HF API error: {e}")
