@@ -124,6 +124,30 @@ def identify():
         'debug_hf': _last_hf_results,
     })
 
+@app.route('/debug')
+def debug_page():
+    return '''<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>HF Debug</title>
+<style>body{font-family:monospace;padding:20px;max-width:800px;margin:0 auto}
+pre{background:#f0f0f0;padding:12px;border-radius:8px;white-space:pre-wrap;word-break:break-all}
+input,button{margin:8px 0;padding:8px 16px;font-size:14px}</style></head>
+<body><h2>🔍 Debug: что возвращает HuggingFace</h2>
+<input type="file" id="f" accept="image/*"><br>
+<button onclick="test()">Отправить фото</button>
+<pre id="out">Выбери фото и нажми кнопку...</pre>
+<script>
+async function test(){
+  const file = document.getElementById('f').files[0];
+  if(!file) return;
+  document.getElementById('out').textContent = 'Отправляю... (до 30 сек)';
+  const fd = new FormData(); fd.append('image', file);
+  const r = await fetch('/api/identify', {method:'POST', body: fd});
+  const d = await r.json();
+  document.getElementById('out').textContent = JSON.stringify(d.debug_hf, null, 2) +
+    '\n\n--- Результат ---\n' + JSON.stringify({bird_id: d.bird_id, demo: d.demo, confidence: d.confidence}, null, 2);
+}
+</script></body></html>'''
+
 @app.route('/api/birds')
 def get_birds():
     return jsonify(list(BIRDS_DATA.values()))
