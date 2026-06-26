@@ -1,119 +1,125 @@
-import os
-import json
-import random
+import os, json, random, io
+import requests
 import numpy as np
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from PIL import Image
-import io
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max upload
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-MODELS_DIR = os.path.join(os.path.dirname(__file__), 'models')
-MODEL_PATH = os.path.join(MODELS_DIR, 'bird_classifier.tflite')
-CLASS_NAMES_PATH = os.path.join(MODELS_DIR, 'class_names.json')
+# Hugging Face — готовая модель на 500+ видов птиц
+HF_API_URL = "https://api-inference.huggingface.co/models/chriamue/bird-species-classifier"
+HF_TOKEN   = os.environ.get("HF_TOKEN", "")   # необязательно, без него тоже работает
 
+# Маппинг: как модель называет наших птиц → наш ID
+BIRD_NAMES_MAP = {
+    # rock pigeon / rock dove
+    "rock dove": "rock_pigeon", "columbia livia": "rock_pigeon",
+    "common pigeon": "rock_pigeon", "rock pigeon": "rock_pigeon",
+    # house sparrow
+    "house sparrow": "house_sparrow",
+    # common myna
+    "common myna": "common_myna", "common mynah": "common_myna",
+    "common myna bird": "common_myna",
+    # eurasian collared dove
+    "eurasian collared dove": "eurasian_collared_dove",
+    "collared dove": "eurasian_collared_dove",
+    # mallard
+    "mallard": "mallard", "mallard duck": "mallard",
+    # eurasian coot
+    "eurasian coot": "eurasian_coot", "coot": "eurasian_coot",
+    "common coot": "eurasian_coot",
+    # common kestrel
+    "common kestrel": "common_kestrel", "kestrel": "common_kestrel",
+    "eurasian kestrel": "common_kestrel",
+    # black kite
+    "black kite": "black_kite",
+    # chukar partridge
+    "chukar partridge": "chukar_partridge", "chukar": "chukar_partridge",
+    # common pheasant
+    "common pheasant": "common_pheasant", "pheasant": "common_pheasant",
+    "ring-necked pheasant": "common_pheasant",
+    # rook
+    "rook": "rook",
+}
+
+CLASS_NAMES_PATH = os.path.join(os.path.dirname(__file__), 'models', 'class_names.json')
 with open(CLASS_NAMES_PATH) as f:
     CLASS_NAMES = json.load(f)
 
-BIRDS_PATH = os.path.join(os.path.dirname(__file__), 'birds.json')
-with open(BIRDS_PATH) as f:
+with open(os.path.join(os.path.dirname(__file__), 'birds.json')) as f:
     BIRDS_DATA = {b['id']: b for b in json.load(f)['birds']}
 
-interpreter = None
 
-def load_model():
-    global interpreter
-    if not os.path.exists(MODEL_PATH):
-        print("bird_classifier.tflite not found — running in DEMO mode")
-        return False
+def identify_via_hf(image_bytes):
+    """Отправляет фото в Hugging Face API и возвращает (bird_id, confidence)."""
+    headers = {}
+    if HF_TOKEN:
+        headers["Authorization"] = f"Bearer {HF_TOKEN}"
     try:
-        try:
-            import tflite_runtime.interpreter as tflite
-            interpreter = tflite.Interpreter(model_path=MODEL_PATH)
-        except ImportError:
-            import tensorflow as tf
-            interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
-        interpreter.allocate_tensors()
-        print("Model loaded successfully")
-        return True
+        resp = requests.post(HF_API_URL, headers=headers,
+                             data=image_bytes, timeout=15)
+        if resp.status_code == 200:
+            results = resp.json()
+            if isinstance(results, list) and results:
+                for item in results[:10]:
+                    label = item.get("label", "").lower().strip()
+                    score = item.get("score", 0)
+                    # Прямое совпадение
+                    bird_id = BIRD_NAMES_MAP.get(label)
+                    if bird_id:
+                        return bird_id, score
+                    # Частичное совпадение
+                    for key, bid in BIRD_NAMES_MAP.items():
+                        if key in label or label in key:
+                            return bid, score
+        return None, 0
     except Exception as e:
-        print(f"Model load error: {e}")
-        return False
+        print(f"HF API error: {e}")
+        return None, 0
 
-MODEL_LOADED = load_model()
 
-def preprocess_image(image_bytes):
-    img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
-    img = img.resize((224, 224), Image.LANCZOS)
-    arr = np.array(img, dtype=np.float32)
-    arr = (arr / 127.5) - 1.0  # MobileNetV2 preprocessing
-    return np.expand_dims(arr, axis=0)
-
-def predict(image_bytes):
-    input_details = interpreter.get_input_details()
-    output_details = interpreter.get_output_details()
-    input_data = preprocess_image(image_bytes)
-    interpreter.set_tensor(input_details[0]['index'], input_data)
-    interpreter.invoke()
-    output = interpreter.get_tensor(output_details[0]['index'])[0]
-    idx = int(np.argmax(output))
-    confidence = float(output[idx])
-    if confidence > 1.0 or confidence < 0.0:
-        output = np.exp(output - np.max(output))
-        output /= output.sum()
-        idx = int(np.argmax(output))
-        confidence = float(output[idx])
-    return CLASS_NAMES[idx], confidence
-
-def predict_demo(image_bytes):
-    # Use pixel statistics to pick a semi-deterministic result for demo
-    img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
-    img = img.resize((64, 64))
+def identify_demo(image_bytes):
+    """Демо-режим: псевдослучайный результат на основе цвета фото."""
+    img = Image.open(io.BytesIO(image_bytes)).convert('RGB').resize((32, 32))
     arr = np.array(img, dtype=np.float32)
     seed = int(arr.mean() * 1000 + arr.std() * 100) % len(CLASS_NAMES)
-    bird_id = CLASS_NAMES[seed]
-    confidence = round(random.uniform(72, 91), 1)
-    return bird_id, confidence
+    return CLASS_NAMES[seed], round(random.uniform(0.72, 0.91), 3)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/api/status')
-def status():
-    return jsonify({'model_loaded': MODEL_LOADED, 'demo_mode': not MODEL_LOADED})
-
 @app.route('/api/identify', methods=['POST'])
 def identify():
     if 'image' not in request.files:
-        return jsonify({'error': 'No image provided'}), 400
+        return jsonify({'error': 'Фото не загружено'}), 400
     file = request.files['image']
-    if file.filename == '':
-        return jsonify({'error': 'Empty filename'}), 400
+    if not file.filename:
+        return jsonify({'error': 'Пустое имя файла'}), 400
     allowed = {'jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'}
     ext = file.filename.rsplit('.', 1)[-1].lower() if '.' in file.filename else ''
     if ext not in allowed:
-        return jsonify({'error': 'Unsupported file type'}), 400
+        return jsonify({'error': 'Неподдерживаемый формат'}), 400
 
     image_bytes = file.read()
+    bird_id, confidence = identify_via_hf(image_bytes)
+    demo = False
 
-    if MODEL_LOADED:
-        bird_id, confidence = predict(image_bytes)
-        demo = False
-    else:
-        bird_id, confidence = predict_demo(image_bytes)
+    if not bird_id:
+        bird_id, confidence = identify_demo(image_bytes)
         demo = True
 
     bird = BIRDS_DATA.get(bird_id)
     if not bird:
-        return jsonify({'error': f'Unknown bird ID: {bird_id}'}), 500
+        return jsonify({'error': f'Неизвестный вид: {bird_id}'}), 500
 
     return jsonify({
         'bird_id': bird_id,
-        'confidence': round(confidence, 1),
+        'confidence': round(confidence * 100, 1),
         'bird': bird,
-        'demo': demo
+        'demo': demo,
     })
 
 @app.route('/api/birds')
@@ -124,7 +130,7 @@ def get_birds():
 def get_bird(bird_id):
     bird = BIRDS_DATA.get(bird_id)
     if not bird:
-        return jsonify({'error': 'Not found'}), 404
+        return jsonify({'error': 'Не найдено'}), 404
     return jsonify(bird)
 
 @app.route('/static/<path:filename>')
