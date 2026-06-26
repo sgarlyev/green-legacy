@@ -51,39 +51,32 @@ with open(os.path.join(os.path.dirname(__file__), 'birds.json')) as f:
     BIRDS_DATA = {b['id']: b for b in json.load(f)['birds']}
 
 
+_last_hf_results = []  # глобально сохраняем последний ответ
+
 def identify_via_hf(image_bytes):
-    """Отправляет фото в Hugging Face API и возвращает (bird_id, confidence)."""
-    headers = {}
-    if HF_TOKEN:
-        headers["Authorization"] = f"Bearer {HF_TOKEN}"
+    global _last_hf_results
+    headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
     try:
         resp = requests.post(HF_API_URL, headers=headers,
-                             data=image_bytes, timeout=20)
-        print(f"HF status: {resp.status_code}")
+                             data=image_bytes, timeout=30)
         if resp.status_code == 200:
             results = resp.json()
-            print(f"HF results: {results[:5]}")
+            _last_hf_results = results[:10] if isinstance(results, list) else []
             if isinstance(results, list) and results:
                 for item in results[:15]:
                     label = item.get("label", "").lower().strip()
                     score = item.get("score", 0)
-                    # Прямое совпадение
                     bird_id = BIRD_NAMES_MAP.get(label)
                     if bird_id:
-                        print(f"Matched: {label} -> {bird_id}")
                         return bird_id, score
-                    # Частичное совпадение по каждому слову
                     for key, bid in BIRD_NAMES_MAP.items():
                         if key in label or label in key:
-                            print(f"Partial match: {label} -> {bid}")
                             return bid, score
-                # Нет совпадения — показываем что вернула модель
-                print(f"No match. Top label: {results[0].get('label')}")
         else:
-            print(f"HF error: {resp.text[:200]}")
+            _last_hf_results = [{"error": resp.status_code, "text": resp.text[:300]}]
         return None, 0
     except Exception as e:
-        print(f"HF API error: {e}")
+        _last_hf_results = [{"exception": str(e)}]
         return None, 0
 
 
@@ -128,6 +121,7 @@ def identify():
         'confidence': round(confidence * 100, 1),
         'bird': bird,
         'demo': demo,
+        'debug_hf': _last_hf_results,
     })
 
 @app.route('/api/birds')
