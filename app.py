@@ -1,4 +1,4 @@
-import os, json, random, io
+import os, json, random, io, base64
 import requests
 import numpy as np
 from flask import Flask, request, jsonify, render_template, send_from_directory
@@ -7,40 +7,23 @@ from PIL import Image
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# Hugging Face — готовая модель на 500+ видов птиц
-HF_API_URL = "https://api-inference.huggingface.co/models/chriamue/bird-species-classifier"
-HF_TOKEN   = os.environ.get("HF_TOKEN", "")   # необязательно, без него тоже работает
+# CLIP zero-shot — даём ровно наши 11 видов, модель выбирает ближайший
+CLIP_API = "https://api-inference.huggingface.co/models/openai/clip-vit-large-patch14"
+HF_TOKEN = os.environ.get("HF_TOKEN", "")
 
-# Маппинг: как модель называет наших птиц → наш ID
-BIRD_NAMES_MAP = {
-    # rock pigeon / rock dove
-    "rock dove": "rock_pigeon", "columbia livia": "rock_pigeon",
-    "common pigeon": "rock_pigeon", "rock pigeon": "rock_pigeon",
-    # house sparrow
-    "house sparrow": "house_sparrow",
-    # common myna
-    "common myna": "common_myna", "common mynah": "common_myna",
-    "common myna bird": "common_myna",
-    # eurasian collared dove
-    "eurasian collared dove": "eurasian_collared_dove",
-    "collared dove": "eurasian_collared_dove",
-    # mallard
-    "mallard": "mallard", "mallard duck": "mallard",
-    # eurasian coot
-    "eurasian coot": "eurasian_coot", "coot": "eurasian_coot",
-    "common coot": "eurasian_coot",
-    # common kestrel
-    "common kestrel": "common_kestrel", "kestrel": "common_kestrel",
-    "eurasian kestrel": "common_kestrel",
-    # black kite
-    "black kite": "black_kite",
-    # chukar partridge
-    "chukar partridge": "chukar_partridge", "chukar": "chukar_partridge",
-    # common pheasant
-    "common pheasant": "common_pheasant", "pheasant": "common_pheasant",
-    "ring-necked pheasant": "common_pheasant",
-    # rook
-    "rook": "rook",
+# Описания для CLIP (чем точнее описание, тем лучше результат)
+BIRD_LABELS = {
+    "rock_pigeon":             "a rock pigeon or rock dove, grey bird with iridescent neck",
+    "house_sparrow":           "a house sparrow, small brown bird with streaked back",
+    "common_myna":             "a common myna bird, black and brown with yellow beak and eye patch",
+    "eurasian_collared_dove":  "a eurasian collared dove, pale beige dove with black neck collar",
+    "mallard":                 "a mallard duck, green headed duck or brown female duck on water",
+    "eurasian_coot":           "a eurasian coot, all black water bird with white forehead shield",
+    "common_kestrel":          "a common kestrel falcon, hovering bird of prey with spotted brown plumage",
+    "black_kite":              "a black kite, dark brown raptor with forked tail soaring",
+    "chukar_partridge":        "a chukar partridge, grey bird with black and white striped face",
+    "common_pheasant":         "a common pheasant, colorful bird with long tail, red face wattles",
+    "rook":                    "a rook, all black crow with bare pale face at base of beak",
 }
 
 CLASS_NAMES_PATH = os.path.join(os.path.dirname(__file__), 'models', 'class_names.json')
@@ -51,37 +34,53 @@ with open(os.path.join(os.path.dirname(__file__), 'birds.json')) as f:
     BIRDS_DATA = {b['id']: b for b in json.load(f)['birds']}
 
 
-_last_hf_results = []  # глобально сохраняем последний ответ
-
-def identify_via_hf(image_bytes):
-    global _last_hf_results
-    headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
+def identify_via_clip(image_bytes):
+    """CLIP zero-shot: выбирает из наших 11 птиц ту, что лучше всего описывает фото."""
     try:
-        resp = requests.post(HF_API_URL, headers=headers,
-                             data=image_bytes, timeout=30)
+        # Сжимаем изображение для быстрой передачи
+        img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+        img.thumbnail((512, 512), Image.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format='JPEG', quality=85)
+        img_b64 = base64.b64encode(buf.getvalue()).decode()
+
+        labels = list(BIRD_LABELS.keys())
+        descriptions = list(BIRD_LABELS.values())
+
+        headers = {"Content-Type": "application/json"}
+        if HF_TOKEN:
+            headers["Authorization"] = f"Bearer {HF_TOKEN}"
+
+        payload = {
+            "inputs": img_b64,
+            "parameters": {"candidate_labels": descriptions}
+        }
+
+        resp = requests.post(CLIP_API, headers=headers,
+                             json=payload, timeout=40)
+
         if resp.status_code == 200:
             results = resp.json()
-            _last_hf_results = results[:10] if isinstance(results, list) else []
             if isinstance(results, list) and results:
-                for item in results[:15]:
-                    label = item.get("label", "").lower().strip()
-                    score = item.get("score", 0)
-                    bird_id = BIRD_NAMES_MAP.get(label)
-                    if bird_id:
+                # CLIP возвращает результаты по порядку candidate_labels
+                top = results[0]
+                top_desc = top.get("label", "")
+                score = top.get("score", 0)
+                # Находим bird_id по описанию
+                for bird_id, desc in BIRD_LABELS.items():
+                    if desc == top_desc:
                         return bird_id, score
-                    for key, bid in BIRD_NAMES_MAP.items():
-                        if key in label or label in key:
-                            return bid, score
-        else:
-            _last_hf_results = [{"error": resp.status_code, "text": resp.text[:300]}]
+                # Если не нашли точно — берём индекс
+                for i, desc in enumerate(descriptions):
+                    if desc == top_desc and i < len(labels):
+                        return labels[i], score
         return None, 0
     except Exception as e:
-        _last_hf_results = [{"exception": str(e)}]
+        print(f"CLIP error: {e}")
         return None, 0
 
 
 def identify_demo(image_bytes):
-    """Демо-режим: псевдослучайный результат на основе цвета фото."""
     img = Image.open(io.BytesIO(image_bytes)).convert('RGB').resize((32, 32))
     arr = np.array(img, dtype=np.float32)
     seed = int(arr.mean() * 1000 + arr.std() * 100) % len(CLASS_NAMES)
@@ -105,7 +104,7 @@ def identify():
         return jsonify({'error': 'Неподдерживаемый формат'}), 400
 
     image_bytes = file.read()
-    bird_id, confidence = identify_via_hf(image_bytes)
+    bird_id, confidence = identify_via_clip(image_bytes)
     demo = False
 
     if not bird_id:
@@ -121,32 +120,7 @@ def identify():
         'confidence': round(confidence * 100, 1),
         'bird': bird,
         'demo': demo,
-        'debug_hf': _last_hf_results,
     })
-
-@app.route('/debug')
-def debug_page():
-    return '''<!DOCTYPE html><html><head><meta charset="utf-8">
-<title>HF Debug</title>
-<style>body{font-family:monospace;padding:20px;max-width:800px;margin:0 auto}
-pre{background:#f0f0f0;padding:12px;border-radius:8px;white-space:pre-wrap;word-break:break-all}
-input,button{margin:8px 0;padding:8px 16px;font-size:14px}</style></head>
-<body><h2>🔍 Debug: что возвращает HuggingFace</h2>
-<input type="file" id="f" accept="image/*"><br>
-<button onclick="test()">Отправить фото</button>
-<pre id="out">Выбери фото и нажми кнопку...</pre>
-<script>
-async function test(){
-  const file = document.getElementById('f').files[0];
-  if(!file) return;
-  document.getElementById('out').textContent = 'Отправляю... (до 30 сек)';
-  const fd = new FormData(); fd.append('image', file);
-  const r = await fetch('/api/identify', {method:'POST', body: fd});
-  const d = await r.json();
-  document.getElementById('out').textContent = JSON.stringify(d.debug_hf, null, 2) +
-    '\n\n--- Результат ---\n' + JSON.stringify({bird_id: d.bird_id, demo: d.demo, confidence: d.confidence}, null, 2);
-}
-</script></body></html>'''
 
 @app.route('/api/birds')
 def get_birds():
