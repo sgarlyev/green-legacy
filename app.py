@@ -1,4 +1,4 @@
-import os, json, random, io, base64
+import os, json, random, io
 import requests
 import numpy as np
 from flask import Flask, request, jsonify, render_template, send_from_directory
@@ -7,23 +7,42 @@ from PIL import Image
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# CLIP zero-shot — даём ровно наши 11 видов, модель выбирает ближайший
-CLIP_API = "https://api-inference.huggingface.co/models/openai/clip-vit-large-patch14"
-HF_TOKEN = os.environ.get("HF_TOKEN", "")
+# iNaturalist Computer Vision API — обучена на миллионах фото дикой природы
+INAT_API = "https://api.inaturalist.org/v1/computervision/score_image"
+HEADERS  = {"User-Agent": "GreenLegacy/1.0 (garlyevserdar1604@gmail.com)"}
 
-# Описания для CLIP (чем точнее описание, тем лучше результат)
-BIRD_LABELS = {
-    "rock_pigeon":             "a rock pigeon or rock dove, grey bird with iridescent neck",
-    "house_sparrow":           "a house sparrow, small brown bird with streaked back",
-    "common_myna":             "a common myna bird, black and brown with yellow beak and eye patch",
-    "eurasian_collared_dove":  "a eurasian collared dove, pale beige dove with black neck collar",
-    "mallard":                 "a mallard duck, green headed duck or brown female duck on water",
-    "eurasian_coot":           "a eurasian coot, all black water bird with white forehead shield",
-    "common_kestrel":          "a common kestrel falcon, hovering bird of prey with spotted brown plumage",
-    "black_kite":              "a black kite, dark brown raptor with forked tail soaring",
-    "chukar_partridge":        "a chukar partridge, grey bird with black and white striped face",
-    "common_pheasant":         "a common pheasant, colorful bird with long tail, red face wattles",
-    "rook":                    "a rook, all black crow with bare pale face at base of beak",
+# Маппинг научных названий → наши ID
+SCIENTIFIC_MAP = {
+    "milvus migrans":           "black_kite",
+    "alectoris chukar":         "chukar_partridge",
+    "falco tinnunculus":        "common_kestrel",
+    "acridotheres tristis":     "common_myna",
+    "phasianus colchicus":      "common_pheasant",
+    "streptopelia decaocto":    "eurasian_collared_dove",
+    "fulica atra":              "eurasian_coot",
+    "passer domesticus":        "house_sparrow",
+    "anas platyrhynchos":       "mallard",
+    "columba livia":            "rock_pigeon",
+    "corvus frugilegus":        "rook",
+}
+
+# Маппинг общих английских названий (запасной вариант)
+COMMON_MAP = {
+    "black kite": "black_kite", "milvus migrans": "black_kite",
+    "chukar": "chukar_partridge", "chukar partridge": "chukar_partridge",
+    "common kestrel": "common_kestrel", "eurasian kestrel": "common_kestrel",
+    "kestrel": "common_kestrel",
+    "common myna": "common_myna", "common mynah": "common_myna", "myna": "common_myna",
+    "common pheasant": "common_pheasant", "ring-necked pheasant": "common_pheasant",
+    "pheasant": "common_pheasant",
+    "eurasian collared-dove": "eurasian_collared_dove",
+    "eurasian collared dove": "eurasian_collared_dove", "collared dove": "eurasian_collared_dove",
+    "eurasian coot": "eurasian_coot", "coot": "eurasian_coot",
+    "house sparrow": "house_sparrow", "sparrow": "house_sparrow",
+    "mallard": "mallard", "mallard duck": "mallard",
+    "rock pigeon": "rock_pigeon", "rock dove": "rock_pigeon",
+    "feral pigeon": "rock_pigeon", "pigeon": "rock_pigeon",
+    "rook": "rook",
 }
 
 CLASS_NAMES_PATH = os.path.join(os.path.dirname(__file__), 'models', 'class_names.json')
@@ -34,49 +53,58 @@ with open(os.path.join(os.path.dirname(__file__), 'birds.json')) as f:
     BIRDS_DATA = {b['id']: b for b in json.load(f)['birds']}
 
 
-def identify_via_clip(image_bytes):
-    """CLIP zero-shot: выбирает из наших 11 птиц ту, что лучше всего описывает фото."""
+def identify_via_inat(image_bytes):
+    """Отправляет фото в iNaturalist CV и ищет наших 11 птиц в топ-20."""
     try:
-        # Сжимаем изображение для быстрой передачи
+        # Сжимаем для быстрой отправки
         img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
-        img.thumbnail((512, 512), Image.LANCZOS)
+        img.thumbnail((800, 800), Image.LANCZOS)
         buf = io.BytesIO()
-        img.save(buf, format='JPEG', quality=85)
-        img_b64 = base64.b64encode(buf.getvalue()).decode()
+        img.save(buf, format='JPEG', quality=88)
+        buf.seek(0)
 
-        labels = list(BIRD_LABELS.keys())
-        descriptions = list(BIRD_LABELS.values())
+        resp = requests.post(
+            INAT_API,
+            headers=HEADERS,
+            files={"image": ("photo.jpg", buf, "image/jpeg")},
+            timeout=20,
+        )
 
-        headers = {"Content-Type": "application/json"}
-        if HF_TOKEN:
-            headers["Authorization"] = f"Bearer {HF_TOKEN}"
+        if resp.status_code != 200:
+            print(f"iNat error: {resp.status_code} {resp.text[:200]}")
+            return None, 0
 
-        payload = {
-            "inputs": img_b64,
-            "parameters": {"candidate_labels": descriptions}
-        }
+        data = resp.json()
+        results = data.get("results", [])
 
-        resp = requests.post(CLIP_API, headers=headers,
-                             json=payload, timeout=40)
+        # Перебираем топ-20 результатов iNaturalist
+        for item in results[:20]:
+            taxon = item.get("taxon", {})
+            score = item.get("combined_score", 0)
 
-        if resp.status_code == 200:
-            results = resp.json()
-            if isinstance(results, list) and results:
-                # CLIP возвращает результаты по порядку candidate_labels
-                top = results[0]
-                top_desc = top.get("label", "")
-                score = top.get("score", 0)
-                # Находим bird_id по описанию
-                for bird_id, desc in BIRD_LABELS.items():
-                    if desc == top_desc:
-                        return bird_id, score
-                # Если не нашли точно — берём индекс
-                for i, desc in enumerate(descriptions):
-                    if desc == top_desc and i < len(labels):
-                        return labels[i], score
+            # Проверяем по научному названию
+            sci = taxon.get("name", "").lower()
+            if sci in SCIENTIFIC_MAP:
+                return SCIENTIFIC_MAP[sci], score
+
+            # Проверяем по общему названию
+            common = taxon.get("preferred_common_name", "").lower()
+            if common in COMMON_MAP:
+                return COMMON_MAP[common], score
+
+            # Частичное совпадение
+            for key, bid in SCIENTIFIC_MAP.items():
+                if key in sci:
+                    return bid, score
+            for key, bid in COMMON_MAP.items():
+                if key in common and len(key) > 4:
+                    return bid, score
+
+        print(f"iNat top3: {[(r.get('taxon',{}).get('name'), r.get('combined_score')) for r in results[:3]]}")
         return None, 0
+
     except Exception as e:
-        print(f"CLIP error: {e}")
+        print(f"iNat error: {e}")
         return None, 0
 
 
@@ -104,7 +132,7 @@ def identify():
         return jsonify({'error': 'Неподдерживаемый формат'}), 400
 
     image_bytes = file.read()
-    bird_id, confidence = identify_via_clip(image_bytes)
+    bird_id, confidence = identify_via_inat(image_bytes)
     demo = False
 
     if not bird_id:
