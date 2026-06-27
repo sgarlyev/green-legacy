@@ -1,0 +1,9 @@
+venv/
+venv_train/
+train/
+uploads/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.git/
